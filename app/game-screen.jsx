@@ -17,6 +17,7 @@ const GameScreen = () => {
     const [totalScore, setTotalScore] = useState(0);
     const [selectedTiles, setSelectedTiles] = useState([]);
     const [isWordInvalid, setIsWordInvalid] = useState(false);
+    const [isFirstWord, setIsFirstWord] = useState(true);
 
     const handleTilePress = (index, letter, value, modifier) => {
         // Update the current word
@@ -41,6 +42,7 @@ const GameScreen = () => {
         if (modifier) {
             setCurrentMods((prevMods) => prevMods + modifier + " ");
         }
+        setIsFirstWord(false);
     };
 
     const handleSubmit = async () => {
@@ -59,6 +61,7 @@ const GameScreen = () => {
                 setCurrentMods("");
                 setCurrentScore(0);
                 setSelectedTiles([]);
+                setIsFirstWord(true);
             }
         } catch (error) {
             if (error.response && error.response.status === 404) {
@@ -81,7 +84,13 @@ const GameScreen = () => {
             const deletedTile = selectedTiles[selectedTiles.length - 1];
 
             // Update the current word
-            setCurrentWord((prevWord) => prevWord.slice(0, -1));
+            setCurrentWord((prevWord) => {
+                const updatedWord = prevWord.slice(0, -1);
+                if (updatedWord.length === 0) {
+                    setIsFirstWord(true);
+                }
+                return updatedWord;
+            });
 
             // Update the selected tiles array
             setSelectedTiles((prevTiles) => prevTiles.slice(0, -1));
@@ -108,23 +117,28 @@ const GameScreen = () => {
 
     return (
         <View style={styles.container}>
-            {/* Render the TopBar component */}
-            <TopBar totalScore={totalScore} />
-            {/* Display current word */}
-            <CurrentWord word={currentWord} />
-            {/* Display current score and modifiers */}
-            <CurrentScore
-                currentScore={currentScore}
-                currentMods={currentMods}
-            />
-            {/* Render the game board */}
-            <Board onTilePress={handleTilePress} gridSize={5}/>
-            {/* Render the submit button */}
-            <SubmitButton
-                onPress={handleSubmit}
-                isWordInvalid={isWordInvalid}
-            />
-            <DeleteButton onPress={handleDelete} />
+            <TopBar style={styles.topBar} totalScore={totalScore} />
+            <View style={styles.content}>
+                {/* Display current word */}
+                <CurrentWord style={styles.currentWord} word={currentWord} />
+                {/* Display current score and modifiers */}
+                <CurrentScore
+                    currentScore={currentScore}
+                    currentMods={currentMods}
+                />
+                {/* Render the game board */}
+                <Board
+                    onTilePress={handleTilePress}
+                    gridSize={5}
+                    isFirstWord={isFirstWord}
+                />
+                {/* Render the submit button */}
+                <SubmitButton
+                    onPress={handleSubmit}
+                    isWordInvalid={isWordInvalid}
+                />
+                <DeleteButton onPress={handleDelete} />
+            </View>
         </View>
     );
 };
@@ -132,9 +146,25 @@ const GameScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        position: "relative",
         alignItems: "center",
     },
+    content: {
+        maxWidth: 400,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1
+    },
+    // topBar: {
+    //     position: "absolute",
+    //     top: 0,
+    // },
+    // currentWord: {
+    //     height: 800, // Adjust the height as needed
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    // },
 });
 
 export default GameScreen;
