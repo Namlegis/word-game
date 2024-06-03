@@ -118,7 +118,7 @@ const GameScreen = () => {
                 currentMods={currentMods}
             />
             {/* Render the game board */}
-            <Board onTilePress={handleTilePress} />
+            <Board onTilePress={handleTilePress} gridSize={5}/>
             {/* Render the submit button */}
             <SubmitButton
                 onPress={handleSubmit}

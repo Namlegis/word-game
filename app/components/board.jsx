@@ -1,16 +1,13 @@
-// components/Board.js
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Tile from "./Tile";
 
-const Board = ({ onTilePress }) => {
-    // Selected Tiles -> visual representation
+const Board = ({ onTilePress, gridSize }) => {
+    // Selected tile -> Index , Letter , Value , Mod
     const [selectedTiles, setSelectedTiles] = useState([]);
 
     const handleTilePress = (index, letter, value, modifier) => {
-        // Check if the tile is adjacent to the last selected tile (if any)
         const isAdjacent = isAdjacentTile(index, selectedTiles);
-
         if (selectedTiles.length === 0 || isAdjacent) {
             setSelectedTiles([...selectedTiles, index]);
             onTilePress(index, letter, value, modifier);
@@ -19,32 +16,35 @@ const Board = ({ onTilePress }) => {
     };
 
     const isAdjacentTile = (index, selectedTiles) => {
-        // Logic to check if the tile is adjacent to the last selected tile
-        // ...
-        return true
+        const lastSelectedTile = selectedTiles[selectedTiles.length - 1];
+        const lastSelectedRow = Math.floor(lastSelectedTile / gridSize);
+        const lastSelectedCol = lastSelectedTile % gridSize;
+        const currentRow = Math.floor(index / gridSize);
+        const currentCol = index % gridSize;
+
+        const rowDiff = Math.abs(lastSelectedRow - currentRow);
+        const colDiff = Math.abs(lastSelectedCol - currentCol);
+
+        const isAdjacent =
+            rowDiff <= 1 && colDiff <= 1 && (rowDiff !== 0 || colDiff !== 0);
+
+        return isAdjacent;
     };
 
-    // TODO: GetTiles component to populate the tilesData
-    const tilesData = [
-        { letter: "A", value: 1 },
-        { letter: "B", value: 3 },
-        { letter: "C", value: 3, modifier: "double letter" },
-        { letter: "D", value: 2 },
-        { letter: "E", value: 1 },
-        { letter: "F", value: 4 },
-        { letter: "G", value: 2 },
-        { letter: "H", value: 4 },
-        { letter: "I", value: 1 },
-        { letter: "J", value: 8, modifier: "double word" },
-        { letter: "K", value: 5 },
-        { letter: "L", value: 1 },
-        { letter: "M", value: 3 },
-        { letter: "N", value: 1 },
-        { letter: "O", value: 1 },
-        { letter: "P", value: 3 },
-    ];
+    const generateTiles = () => {
+        const tiles = [];
+        for (let i = 0; i < gridSize * gridSize; i++) {
+            const letter = String.fromCharCode(65 + (i % 26));
+            const value = Math.floor(Math.random() * 5) + 1;
+            const modifier = i % 5 === 0 ? "double letter" : null;
+
+            tiles.push({ letter, value, modifier });
+        }
+        return tiles;
+    };
 
     const renderTiles = () => {
+        const tilesData = generateTiles();
         return tilesData.map((tile, index) => (
             <Tile
                 key={index}
@@ -63,15 +63,23 @@ const Board = ({ onTilePress }) => {
         ));
     };
 
-    return <View style={styles.board}>{renderTiles()}</View>;
+    return (
+        <View style={styles.boardContainer}>
+            <View style={[styles.board, { width: gridSize * 54 }]}>
+                {renderTiles()}
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
+    boardContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+    },
     board: {
         flexDirection: "row",
         flexWrap: "wrap",
-        width: 250,
-        height: 200,
     },
 });
 
