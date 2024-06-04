@@ -1,8 +1,8 @@
 // components/TopBar.js
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import TotalScore from './TotalScore';
 import Settings from './Settings';
+import TotalScore from './TotalScore';
 
 const TopBar = ({ totalScore }) => {
   return (

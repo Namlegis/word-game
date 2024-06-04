@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import Board from "./components/board";
-import CurrentWord from "./components/CurrentWord";
-import CurrentScore from "./components/CurrentScore";
-import SubmitButton from "./components/SubmitButton";
-import DeleteButton from "./components/DeleteButton";
-import TopBar from "./components/TopBar";
+import Board from "./components/board/board";
+import CurrentWord from "./components/current/CurrentWord";
+import CurrentScore from "./components/current/CurrentScore";
+import SubmitButton from "./components/buttons/SubmitButton";
+import DeleteButton from "./components/buttons/DeleteButton";
+import TopBar from "./components/topBar/TopBar";
 
 import axios from "axios";
 

@@ -1,58 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Tile from "./Tile";
+import generateTileData from "./TileCreator.jsx";
 
-const generateTileData = (gridSize) => {
-    const tileData = [];
-    const totalTiles = gridSize * gridSize;
-
-    // Define the distribution of tiles
-    const distribution = {
-        A: { count: 9, value: 1 },
-        B: { count: 2, value: 3 },
-        C: { count: 2, value: 3, modifier: "double letter" },
-        D: { count: 4, value: 2 },
-        E: { count: 12, value: 1 },
-        F: { count: 9, value: 1 },
-        G: { count: 2, value: 3 },
-        H: { count: 2, value: 3, modifier: "double letter" },
-        I: { count: 4, value: 2 },
-        J: { count: 3, value: 1 },
-        K: { count: 3, value: 1 },
-        L: { count: 2, value: 3 },
-        M: { count: 2, value: 3, modifier: "double letter" },
-        N: { count: 4, value: 2 },
-        O: { count: 12, value: 1 },
-        P: { count: 9, value: 1 },
-        Qu: { count: 2, value: 3 },
-        R: { count: 2, value: 3, modifier: "double letter" },
-        S: { count: 12, value: 2 },
-        T: { count: 12, value: 1 },
-        U: { count: 9, value: 1 },
-        V: { count: 2, value: 3 },
-        W: { count: 2, value: 3, modifier: "double letter" },
-        X: { count: 2, value: 2 },
-        Y: { count: 2, value: 1 },
-        Z: { count: 2, value: 1 },        
-    };
-
-    // Flatten the distribution into an array of tiles
-    const tiles = Object.entries(distribution).flatMap(
-        ([letter, { count, value, modifier }]) =>
-            Array(count).fill({ letter, value, modifier })
-    );
-
-    // Shuffle the tiles randomly
-    for (let i = tiles.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
-    }
-
-    // Take the required number of tiles based on the grid size
-    tileData.push(...tiles.slice(0, totalTiles));
-
-    return tileData;
-};
 
 const Board = ({ onTilePress, gridSize, isFirstWord }) => {
     // Selected tile -> Index , Letter , Value , Mod
