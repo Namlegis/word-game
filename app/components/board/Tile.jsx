@@ -6,8 +6,8 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 // Props:
 // - letter: the letter to display on the tile (default: 'abc')
 // - value: the number value of the letter (default: 0)
-// - modifier: special modifier for the tile (e.g., 'double letter' or 'double word')
-// - onPress: function to call when the tile is pressed
+// - modifier: score modifier for the tile (default: null)
+// - onPress: function
 
 const Tile = ({ letter = 'abc', value = 0, modifier = null, onPress }) => {
   // Initialize tile and text styles
