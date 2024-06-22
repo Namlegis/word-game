@@ -1,24 +1,26 @@
+// components/CurrentWord.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useGameContext } from '../../GameContext';
 
-const CurrentWord = ({ word }) => {
+const CurrentWord = () => {
+    const { currentWord } = useGameContext();
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.word}>{word}</Text>
-      </View>
+        <View style={styles.container}>
+            <Text style={styles.word}>{currentWord}</Text>
+        </View>
     );
-  };
+};
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 10,
+        marginBottom: 10,
     },
     word: {
-      fontSize: 24,
-      fontWeight: 'bold',
+        fontSize: 24,
+        fontWeight: 'bold',
     },
-  });
+});
 
-  export default CurrentWord;
+export default CurrentWord;

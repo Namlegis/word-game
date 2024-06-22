@@ -1,36 +1,42 @@
+// components/SubmitButton.js
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native';
+import { useGameContext } from '../../GameContext';
+import axios from 'axios';
 
-const SubmitButton = ({ onPress, isWordInvalid }) => {
-  const buttonStyle = [
-    styles.button,
-    isWordInvalid && styles.invalidButton,
-  ];
+const SubmitButton = () => {
+    const {
+        currentWord,
+        currentScore,
+        setTotalScore,
+        setSelectedTiles,
+        setIsFirstWord,
+        setIsWordInvalid
+    } = useGameContext();
 
-  return (
-    <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={styles.buttonText}>Submit</Text>
-    </TouchableOpacity>
-  );
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.get(
+                `https://api.dictionaryapi.dev/api/v2/entries/en/${currentWord}`
+            );
+            if (response.data && response.data.length > 0) {
+                setTotalScore(prev => prev + currentScore);
+                setSelectedTiles([]);
+                setIsFirstWord(true);
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 404) {
+                setIsWordInvalid(true);
+                setTimeout(() => {
+                    setIsWordInvalid(false);
+                }, 1000);
+            } else {
+                console.error("Error:", error);
+            }
+        }
+    };
+
+    return <Button title="Submit" onPress={handleSubmit} />;
 };
-
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'blue',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  invalidButton: {
-    backgroundColor: 'red',
-  },
-});
 
 export default SubmitButton;

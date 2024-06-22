@@ -1,27 +1,25 @@
+// components/DeleteButton.js
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native';
+import { useGameContext } from '../../GameContext';
 
-const DeleteButton = ({ onPress }) => {
-  return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>Delete</Text>
-    </TouchableOpacity>
-  );
+const DeleteButton = () => {
+    const {
+        selectedTiles,
+        setSelectedTiles,
+        setIsFirstWord,
+    } = useGameContext();
+
+    const handleDelete = () => {
+        if (selectedTiles.length > 0) {
+            setSelectedTiles(prev => prev.slice(0, -1));
+            if (selectedTiles.length === 1) {
+                setIsFirstWord(true);
+            }
+        }
+    };
+
+    return <Button title="Delete" onPress={handleDelete} />;
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'red',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default DeleteButton;

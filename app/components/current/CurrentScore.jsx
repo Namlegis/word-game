@@ -1,29 +1,30 @@
+// components/CurrentScore.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useGameContext } from '../../GameContext';
 
-const CurrentScore = ({ currentScore, currentMods }) => {
+const CurrentScore = () => {
+    const { currentScore, currentMods } = useGameContext();
+
     return (
-      <View style={styles.container}>
-        {/* Display current modifiers */}
-        <Text style={styles.word}>{currentMods}</Text>
-         {/* Display current score */}
-        <Text style={styles.word}>{currentScore}</Text>
-      </View>
+        <View style={styles.container}>
+            <Text style={styles.score}>Current Score: {currentScore}</Text>
+            <Text style={styles.mods}>Modifiers: {currentMods}</Text>
+        </View>
     );
-  };
+};
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-      flexDirection: 'row', // Arrange items in a row
-      justifyContent: 'space-between', // Add space between items
-      alignItems: 'center', // Center items vertically
-      marginBottom: 10,
-      paddingHorizontal: 20, // Add horizontal padding
+        marginBottom: 10,
     },
-    text: {
-      fontSize: 18,
-      fontWeight: 'bold',
+    score: {
+        fontSize: 18,
     },
-  });
+    mods: {
+        fontSize: 14,
+        color: 'gray',
+    },
+});
 
-  export default CurrentScore;
+export default CurrentScore;

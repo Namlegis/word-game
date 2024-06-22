@@ -3,8 +3,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Settings from './Settings';
 import TotalScore from './TotalScore';
+import { useGameContext } from '../../GameContext';
 
-const TopBar = ({ totalScore }) => {
+const TopBar = () => {
+  const { totalScore } = useGameContext();
   return (
     <View style={styles.container}>
       {/* Render the TotalScore component */}
