@@ -6,10 +6,10 @@ const Tile = ({ letter, value, modifier, onPress, isSelected }) => {
   const tileStyle = [styles.tile];
   const textStyle = [styles.letter];
 
-  if (modifier === 'double letter') {
+  if (modifier === 'DL') {
     tileStyle.push(styles.doubleLetterTile);
     textStyle.push(styles.doubleLetterText);
-  } else if (modifier === 'double word') {
+  } else if (modifier === 'DW') {
     tileStyle.push(styles.doubleWordTile);
     textStyle.push(styles.doubleWordText);
   }

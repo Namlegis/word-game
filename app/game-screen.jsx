@@ -1,13 +1,14 @@
 // app/game-screen.js
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { useGameContext } from './GameContext.jsx';
-import Board from './components/board/board.jsx';
-import CurrentWord from './components/current/CurrentWord.jsx';
-import CurrentScore from './components/current/CurrentScore.jsx';
-import SubmitButton from './components/buttons/SubmitButton.jsx';
-import DeleteButton from './components/buttons/DeleteButton.jsx';
-import TopBar from './components/topBar/TopBar.jsx';
+import { useGameContext } from "./GameContext.jsx";
+import Board from "./components/board/board.jsx";
+import CurrentWord from "./components/current/CurrentWord.jsx";
+import CurrentScore from "./components/current/CurrentScore.jsx";
+import SubmitButton from "./components/buttons/SubmitButton.jsx";
+import DeleteButton from "./components/buttons/DeleteButton.jsx";
+import TopBar from "./components/topBar/TopBar.jsx";
+import RoundCounter from "./components/RoundCounter.jsx";
 
 const GameScreen = () => {
     const { totalScore } = useGameContext();
@@ -16,6 +17,7 @@ const GameScreen = () => {
         <View style={styles.container}>
             <TopBar totalScore={totalScore} />
             <View style={styles.content}>
+                <RoundCounter />
                 <CurrentWord />
                 <CurrentScore />
                 <Board />
@@ -34,14 +36,14 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         padding: 10,
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '100%',
+        flexDirection: "row",
+        justifyContent: "space-around",
+        width: "100%",
         marginTop: 20,
     },
 });

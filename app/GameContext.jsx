@@ -1,5 +1,5 @@
 // GameContext.js
-import React, { createContext, useState, useContext, useMemo  } from "react";
+import React, { createContext, useState, useContext, useMemo } from "react";
 import generateTileData from "./components/board/TileCreator.jsx";
 
 const GameContext = createContext();
@@ -14,19 +14,11 @@ export const GameProvider = ({ children }) => {
     const [isFirstWord, setIsFirstWord] = useState(true);
     const [tileData, setTileData] = useState(generateTileData(6));
     const [selectedTiles, setSelectedTiles] = useState([]);
+    const [round, setRound] = useState(1)
 
     // Derive currentWord, currentScore, and currentMods from selectedTiles
     const currentWord = useMemo(
         () => selectedTiles.map((index) => tileData[index].letter).join(""),
-        [selectedTiles, tileData]
-    );
-
-    const currentScore = useMemo(
-        () =>
-            selectedTiles.reduce(
-                (sum, index) => sum + tileData[index].value,
-                0
-            ),
         [selectedTiles, tileData]
     );
 
@@ -38,6 +30,30 @@ export const GameProvider = ({ children }) => {
                 .join(" "),
         [selectedTiles, tileData]
     );
+
+    const currentScore = useMemo(() => {
+        let wordMultiplier = 1;
+        let score = 0;
+      
+        selectedTiles.forEach((index) => {
+          const tile = tileData[index];
+          let letterScore = tile.value;
+      
+          // Apply letter modifiers
+          if (tile.modifier === 'DL') letterScore *= 2;
+          if (tile.modifier === 'TL') letterScore *= 3;
+      
+          // Add to the score
+          score += letterScore;
+      
+          // Check for word multipliers
+          if (tile.modifier === 'DW') wordMultiplier *= 2;
+          if (tile.modifier === 'TW') wordMultiplier *= 3;
+        });
+      
+        // Apply word multiplier
+        return score * wordMultiplier;
+      }, [selectedTiles, tileData]);
 
     return (
         <GameContext.Provider
@@ -57,6 +73,8 @@ export const GameProvider = ({ children }) => {
                 setTileData,
                 selectedTiles,
                 setSelectedTiles,
+                round,
+                setRound
             }}
         >
             {children}

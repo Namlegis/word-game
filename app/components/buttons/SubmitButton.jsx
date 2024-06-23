@@ -1,8 +1,9 @@
 // components/SubmitButton.js
-import React from 'react';
-import { Button } from 'react-native';
-import { useGameContext } from '../../GameContext';
-import axios from 'axios';
+import React from "react";
+import { Button } from "react-native";
+import { useGameContext } from "../../GameContext";
+import axios from "axios";
+import generateTileData from "../board/TileCreator";
 
 const SubmitButton = () => {
     const {
@@ -11,8 +12,23 @@ const SubmitButton = () => {
         setTotalScore,
         setSelectedTiles,
         setIsFirstWord,
-        setIsWordInvalid
+        setIsWordInvalid,
+        round,
+        setRound,
+        tileData,
+        setTileData,
+        gridSize,
+        selectedTiles
     } = useGameContext();
+
+    const replaceUsedTiles = () => {
+        const newTileData = [...tileData];
+        const newTiles = generateTileData(selectedTiles.length);
+        selectedTiles.forEach((index, i) => {
+            newTileData[index] = newTiles[i];
+        });
+        setTileData(newTileData);
+    };
 
     const handleSubmit = async () => {
         try {
@@ -20,9 +36,17 @@ const SubmitButton = () => {
                 `https://api.dictionaryapi.dev/api/v2/entries/en/${currentWord}`
             );
             if (response.data && response.data.length > 0) {
-                setTotalScore(prev => prev + currentScore);
+                setTotalScore((prev) => prev + currentScore);
                 setSelectedTiles([]);
                 setIsFirstWord(true);
+                if (round < 7) {
+                    setRound((prev) => prev + 1);
+                    replaceUsedTiles();
+                    console.log("TileData set");
+                } else {
+                    // end game
+                    console.log("Game Over!");
+                }
             }
         } catch (error) {
             if (error.response && error.response.status === 404) {

@@ -57,9 +57,9 @@ const getRandomModifier = () => {
     const randomValue = Math.random();
 
     if (randomValue < 0.1) {
-        return "double letter";
+        return "DL";
     } else if (randomValue < 0.15) {
-        return "double word";
+        return "DW";
     } else {
         return null;
     }

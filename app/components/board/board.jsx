@@ -1,5 +1,5 @@
 // components/Board.js
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useGameContext } from '../../GameContext.jsx';
 import Tile from './Tile';
@@ -11,8 +11,15 @@ const Board = () => {
         selectedTiles,
         setSelectedTiles,
         isFirstWord,
-        setIsFirstWord
+        setIsFirstWord,
+        setTileData,
     } = useGameContext();
+
+    useEffect(() => {
+        // This effect will run whenever tileData changes
+        // You can add any additional logic here if needed
+        console.log('tileData useEffect')
+    }, [tileData]);
 
     const isAdjacentTile = (index) => {
         if (selectedTiles.length === 0) return true;
