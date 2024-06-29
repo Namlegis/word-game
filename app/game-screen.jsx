@@ -9,9 +9,24 @@ import SubmitButton from "./components/buttons/SubmitButton.jsx";
 import DeleteButton from "./components/buttons/DeleteButton.jsx";
 import TopBar from "./components/topBar/TopBar.jsx";
 import RoundCounter from "./components/RoundCounter.jsx";
+import PauseOverlay from "./components/PauseOverlay.jsx";
 
 const GameScreen = () => {
     const { totalScore } = useGameContext();
+    const { isPaused, setIsPaused } = useGameContext();
+
+    const handlePause = () => setIsPaused(true);
+    const handleResume = () => setIsPaused(false);
+    const handleRestart = () => {
+        // Implement restart logic
+        setIsPaused(false);
+    };
+    const handleSettings = () => {
+        // Implement settings logic
+    };
+    const handleMainMenu = () => {
+        // Implement main menu navigation
+    };
 
     return (
         <View style={styles.container}>
@@ -26,6 +41,7 @@ const GameScreen = () => {
                     <DeleteButton />
                 </View>
             </View>
+            <PauseOverlay />
         </View>
     );
 };

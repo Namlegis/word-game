@@ -14,7 +14,8 @@ export const GameProvider = ({ children }) => {
     const [isFirstWord, setIsFirstWord] = useState(true);
     const [tileData, setTileData] = useState(generateTileData(6));
     const [selectedTiles, setSelectedTiles] = useState([]);
-    const [round, setRound] = useState(1)
+    const [round, setRound] = useState(1);
+    const [isPaused, setIsPaused] = useState(false);
 
     // Derive currentWord, currentScore, and currentMods from selectedTiles
     const currentWord = useMemo(
@@ -74,7 +75,9 @@ export const GameProvider = ({ children }) => {
                 selectedTiles,
                 setSelectedTiles,
                 round,
-                setRound
+                setRound,
+                setIsPaused,
+                isPaused
             }}
         >
             {children}
