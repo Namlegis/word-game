@@ -1,7 +1,8 @@
 // components/PauseOverlay.jsx
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useGameContext } from "../GameContext";
+import { useGameContext } from "../../GameContext";
+import generateTileData from "../board/TileCreator";
 import { router } from "expo-router";
 
 const PauseOverlay = () => {
@@ -12,12 +13,16 @@ const PauseOverlay = () => {
         setRound,
         setSelectedTiles,
         setIsFirstWord,
+        setIsGameStarted,
+        setTileData,
+        gridSize
     } = useGameContext();
 
     const handleResume = () => setIsPaused(false);
 
     const handleRestart = () => {
         setIsPaused(false);
+        setTileData(generateTileData(gridSize))
         setTotalScore(0);
         setRound(1);
         setSelectedTiles([]);
@@ -27,6 +32,7 @@ const PauseOverlay = () => {
     const handleSettings = () => {
         // TODO: Implement settings logic
         console.log("Settings clicked");
+        router.push("/Settings");
     };
 
     const handleMainMenu = () => {

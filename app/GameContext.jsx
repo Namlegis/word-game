@@ -12,12 +12,13 @@ export const GameProvider = ({ children }) => {
     const [gridSize, setGridSize] = useState(6);
     const [isWordInvalid, setIsWordInvalid] = useState(false);
     const [isFirstWord, setIsFirstWord] = useState(true);
-    const [tileData, setTileData] = useState(generateTileData(6));
+    const [tileData, setTileData] = useState(generateTileData(gridSize));
     const [selectedTiles, setSelectedTiles] = useState([]);
     const [round, setRound] = useState(1);
     const [isPaused, setIsPaused] = useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false);
 
-    // Derive currentWord, currentScore, and currentMods from selectedTiles
+    // get currentWord, currentScore, and currentMods from selectedTiles
     const currentWord = useMemo(
         () => selectedTiles.map((index) => tileData[index].letter).join(""),
         [selectedTiles, tileData]
@@ -35,26 +36,26 @@ export const GameProvider = ({ children }) => {
     const currentScore = useMemo(() => {
         let wordMultiplier = 1;
         let score = 0;
-      
+
         selectedTiles.forEach((index) => {
-          const tile = tileData[index];
-          let letterScore = tile.value;
-      
-          // Apply letter modifiers
-          if (tile.modifier === 'DL') letterScore *= 2;
-          if (tile.modifier === 'TL') letterScore *= 3;
-      
-          // Add to the score
-          score += letterScore;
-      
-          // Check for word multipliers
-          if (tile.modifier === 'DW') wordMultiplier *= 2;
-          if (tile.modifier === 'TW') wordMultiplier *= 3;
+            const tile = tileData[index];
+            let letterScore = tile.value;
+
+            // Apply letter modifiers
+            if (tile.modifier === "DL") letterScore *= 2;
+            if (tile.modifier === "TL") letterScore *= 3;
+
+            // Add to the score
+            score += letterScore;
+
+            // Check for word multipliers
+            if (tile.modifier === "DW") wordMultiplier *= 2;
+            if (tile.modifier === "TW") wordMultiplier *= 3;
         });
-      
+
         // Apply word multiplier
         return score * wordMultiplier;
-      }, [selectedTiles, tileData]);
+    }, [selectedTiles, tileData]);
 
     return (
         <GameContext.Provider
@@ -77,7 +78,9 @@ export const GameProvider = ({ children }) => {
                 round,
                 setRound,
                 setIsPaused,
-                isPaused
+                isPaused,
+                isGameStarted,
+                setIsGameStarted,
             }}
         >
             {children}
