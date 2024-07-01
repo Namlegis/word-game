@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.namlegis.wordgame"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.namlegis.wordgame"
     },
     "web": {
       "bundler": "metro",
@@ -27,7 +29,21 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "635a479e-961f-4e90-ad24-30ef5dff02fa"
+      }
+    },
+    "owner": "namlegis",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/635a479e-961f-4e90-ad24-30ef5dff02fa"
+    }
   }
-  
 }
