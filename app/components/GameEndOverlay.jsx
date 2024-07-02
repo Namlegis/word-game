@@ -39,7 +39,7 @@ const EndGameOverlay = () => {
                 <Text style={styles.buttonText}>Restart</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleMainMenu}>
-                <Text style={styles.buttonText}>Save & Exit</Text>
+                <Text style={styles.buttonText}>Main Menu</Text>
             </TouchableOpacity>
         </View>
     );
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        backgroundColor: "rgba(0, 0, 0, 0.9)",
         justifyContent: "center",
         alignItems: "center",
     },

@@ -4,6 +4,7 @@ import { Button } from "react-native";
 import { useGameContext } from "../../GameContext";
 import axios from "axios";
 import generateTileData from "../board/TileCreator";
+import { saveScore } from "../../../scoreStorage";
 
 const SubmitButton = () => {
     const {
@@ -20,7 +21,8 @@ const SubmitButton = () => {
         gridSize,
         selectedTiles,
         setIsGameEnd,
-        isGameEnd
+        isGameEnd,
+        totalScore
     } = useGameContext();
 
     const replaceUsedTiles = () => {
@@ -48,7 +50,7 @@ const SubmitButton = () => {
                 } else {
                     // end game
                     setIsGameEnd(true);
-                    console.log({isGameEnd})
+                    await saveScore(totalScore);
                     console.log("Game Over!");
                 }
             }
