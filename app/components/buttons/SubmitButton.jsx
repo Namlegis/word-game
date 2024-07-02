@@ -18,7 +18,9 @@ const SubmitButton = () => {
         tileData,
         setTileData,
         gridSize,
-        selectedTiles
+        selectedTiles,
+        setIsGameEnd,
+        isGameEnd
     } = useGameContext();
 
     const replaceUsedTiles = () => {
@@ -45,6 +47,8 @@ const SubmitButton = () => {
                     console.log("TileData set");
                 } else {
                     // end game
+                    setIsGameEnd(true);
+                    console.log({isGameEnd})
                     console.log("Game Over!");
                 }
             }

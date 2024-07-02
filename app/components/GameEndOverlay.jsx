@@ -1,54 +1,42 @@
-// components/topBar/PauseOverlay.jsx
+// components/GameEndOverlay.jsx
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useGameContext } from "../../GameContext";
-import generateTileData from "../board/TileCreator";
+import { useGameContext } from "../GameContext";
+import generateTileData from "./board/TileCreator";
 import { router } from "expo-router";
 
-const PauseOverlay = () => {
+const EndGameOverlay = () => {
     const {
-        isPaused,
         setIsPaused,
         setTotalScore,
         setRound,
         setSelectedTiles,
         setIsFirstWord,
-        setIsGameStarted,
+        setIsGameEnd,
         setTileData,
         gridSize,
-        restart
+        totalScore,
+        isGameEnd,
+        restart,
     } = useGameContext();
 
-    const handleResume = () => setIsPaused(false);
-
-    const handleRestart = () => restart();
-
-    const handleSettings = () => {
-        // TODO: Implement settings logic
-        console.log("Settings clicked");
-        router.push("/Settings");
+    const handleRestart = () => {
+        restart;
     };
 
     const handleMainMenu = () => {
-        // TODO: Implement main menu navigation
         console.log("Main Menu clicked");
-        setIsPaused(false);
         router.replace("/");
     };
 
-    if (!isPaused) return null;
+    if (!isGameEnd) return null;
 
     return (
         <View style={styles.overlay}>
-            <Text style={styles.title}>Paused</Text>
-            <TouchableOpacity style={styles.button} onPress={handleResume}>
-                <Text style={styles.buttonText}>Resume</Text>
-            </TouchableOpacity>
+            <Text style={styles.title}>Game Over!</Text>
+            <Text style={styles.title}>Your Score was {totalScore}</Text>
             <TouchableOpacity style={styles.button} onPress={handleRestart}>
                 <Text style={styles.buttonText}>Restart</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleSettings}>
-                <Text style={styles.buttonText}>Settings</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleMainMenu}>
                 <Text style={styles.buttonText}>Save & Exit</Text>
@@ -88,4 +76,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PauseOverlay;
+export default EndGameOverlay;

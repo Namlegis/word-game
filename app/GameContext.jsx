@@ -16,7 +16,17 @@ export const GameProvider = ({ children }) => {
     const [selectedTiles, setSelectedTiles] = useState([]);
     const [round, setRound] = useState(1);
     const [isPaused, setIsPaused] = useState(false);
-    const [isGameStarted, setIsGameStarted] = useState(false);
+    const [isGameEnd, setIsGameEnd] = useState(false);
+
+    const restart = () => {
+        setIsGameEnd(false);
+        setTileData(generateTileData(gridSize));
+        setIsPaused(false);
+        setTotalScore(0);
+        setRound(1);
+        setSelectedTiles([]);
+        setIsFirstWord(true);
+    };
 
     // get currentWord, currentScore, and currentMods from selectedTiles
     const currentWord = useMemo(
@@ -79,8 +89,9 @@ export const GameProvider = ({ children }) => {
                 setRound,
                 setIsPaused,
                 isPaused,
-                isGameStarted,
-                setIsGameStarted,
+                isGameEnd,
+                setIsGameEnd,
+                restart
             }}
         >
             {children}

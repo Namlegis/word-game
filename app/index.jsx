@@ -12,15 +12,16 @@ import generateTileData from "./components/board/TileCreator";
 
 export default function App() {
     const {
-        isGameStarted,
-        setIsGameStarted,
+        isGameEnd,
+        setIsGameEnd,
         setIsPaused,
         setTotalScore,
         setRound,
         setSelectedTiles,
         setIsFirstWord,
         setTileData,
-        gridSize
+        gridSize,
+        restart,
     } = useGameContext();
     const router = useRouter();
 
@@ -29,13 +30,7 @@ export default function App() {
     };
 
     const handleNewGame = () => {
-        setIsGameStarted(true);
-        setTileData(generateTileData(gridSize))
-        setIsPaused(false);
-        setTotalScore(0);
-        setRound(1);
-        setSelectedTiles([]);
-        setIsFirstWord(true);
+        restart();
         router.push("/game-screen");
     };
 
@@ -51,7 +46,7 @@ export default function App() {
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <Text style={styles.title}>Word Game</Text>
-                {isGameStarted && (
+                {!isGameEnd && (
                     <TouchableOpacity
                         style={styles.button}
                         onPress={handleResumeGame}
