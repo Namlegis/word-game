@@ -11,6 +11,7 @@ import TopBar from "./components/topBar/TopBar.jsx";
 import RoundCounter from "./components/RoundCounter.jsx";
 import PauseOverlay from "./components/topBar/PauseOverlay.jsx";
 import EndGameOverlay from "./components/GameEndOverlay.jsx";
+import InvalidWordOverlay from "./components/InvalidWordOverlay.jsx";
 
 const GameScreen = () => {
     const { totalScore } = useGameContext();
@@ -31,6 +32,7 @@ const GameScreen = () => {
             </View>
             <PauseOverlay />
             <EndGameOverlay />
+            <InvalidWordOverlay />
         </View>
     );
 };

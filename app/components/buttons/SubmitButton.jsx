@@ -1,5 +1,5 @@
 // components/SubmitButton.js
-import React from "react";
+import React, {useEffect} from "react";
 import { Button } from "react-native";
 import { useGameContext } from "../../GameContext";
 import axios from "axios";
@@ -22,7 +22,8 @@ const SubmitButton = () => {
         selectedTiles,
         setIsGameEnd,
         isGameEnd,
-        totalScore
+        totalScore,
+        isWordInvalid,
     } = useGameContext();
 
     const replaceUsedTiles = () => {
@@ -33,6 +34,16 @@ const SubmitButton = () => {
         });
         setTileData(newTileData);
     };
+
+    useEffect(() => {
+        const saveGameScore = async () => {
+            if (isGameEnd) {
+                await saveScore(totalScore);
+                console.log("Game Over!");
+            }
+        };
+        saveGameScore();
+    }, [isGameEnd]);
 
     const handleSubmit = async () => {
         try {
@@ -50,8 +61,6 @@ const SubmitButton = () => {
                 } else {
                     // end game
                     setIsGameEnd(true);
-                    await saveScore(totalScore);
-                    console.log("Game Over!");
                 }
             }
         } catch (error) {
@@ -59,7 +68,7 @@ const SubmitButton = () => {
                 setIsWordInvalid(true);
                 setTimeout(() => {
                     setIsWordInvalid(false);
-                }, 1000);
+                }, 500);
             } else {
                 console.error("Error:", error);
             }

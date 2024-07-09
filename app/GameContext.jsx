@@ -18,6 +18,15 @@ export const GameProvider = ({ children }) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isGameEnd, setIsGameEnd] = useState(false);
 
+    const handleDelete = () => {
+        if (selectedTiles.length > 0) {
+            setSelectedTiles(prev => prev.slice(0, -1));
+            if (selectedTiles.length === 1) {
+                setIsFirstWord(true);
+            }
+        }
+    };
+
     const restart = () => {
         setIsGameEnd(false);
         setTileData(generateTileData(gridSize));
@@ -91,7 +100,8 @@ export const GameProvider = ({ children }) => {
                 isPaused,
                 isGameEnd,
                 setIsGameEnd,
-                restart
+                restart,
+                handleDelete
             }}
         >
             {children}

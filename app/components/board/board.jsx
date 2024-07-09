@@ -1,8 +1,8 @@
 // components/Board.js
-import React, {useEffect} from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useGameContext } from '../../GameContext.jsx';
-import Tile from './Tile';
+import React, { useEffect } from "react";
+import { View, StyleSheet } from "react-native";
+import { useGameContext } from "../../GameContext.jsx";
+import Tile from "./Tile";
 
 const Board = () => {
     const {
@@ -13,12 +13,13 @@ const Board = () => {
         isFirstWord,
         setIsFirstWord,
         setTileData,
+        handleDelete,
     } = useGameContext();
 
     useEffect(() => {
         // This effect will run whenever tileData changes
         // You can add any additional logic here if needed
-        console.log('tileData useEffect')
+        console.log("tileData useEffect");
     }, [tileData]);
 
     const isAdjacentTile = (index) => {
@@ -28,13 +29,22 @@ const Board = () => {
         const lastCol = lastSelectedTile % gridSize;
         const currentRow = Math.floor(index / gridSize);
         const currentCol = index % gridSize;
-        return Math.abs(currentRow - lastRow) <= 1 && Math.abs(currentCol - lastCol) <= 1;
+        return (
+            Math.abs(currentRow - lastRow) <= 1 &&
+            Math.abs(currentCol - lastCol) <= 1
+        );
     };
 
     const handleTilePress = (index, letter, value, modifier) => {
-        if (!selectedTiles.includes(index) && (isAdjacentTile(index) || isFirstWord)) {
-            setSelectedTiles(prev => [...prev, index]);
+        if (
+            !selectedTiles.includes(index) &&
+            (isAdjacentTile(index) || isFirstWord)
+        ) {
+            setSelectedTiles((prev) => [...prev, index]);
             if (isFirstWord) setIsFirstWord(false);
+        }
+        if (index === selectedTiles[selectedTiles.length - 1]) {
+            handleDelete();
         }
     };
 
@@ -50,7 +60,14 @@ const Board = () => {
                     letter={tile.letter}
                     value={tile.value}
                     modifier={tile.modifier}
-                    onPress={() => handleTilePress(index, tile.letter, tile.value, tile.modifier)}
+                    onPress={() =>
+                        handleTilePress(
+                            index,
+                            tile.letter,
+                            tile.value,
+                            tile.modifier
+                        )
+                    }
                     isSelected={selectedTiles.includes(index)}
                 />
             ))}
@@ -60,9 +77,9 @@ const Board = () => {
 
 const styles = StyleSheet.create({
     board: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
     },
 });
 
