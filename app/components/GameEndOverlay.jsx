@@ -2,19 +2,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useGameContext } from "../GameContext";
-import generateTileData from "./board/TileCreator";
 import { router } from "expo-router";
 
 const EndGameOverlay = () => {
     const {
-        setIsPaused,
-        setTotalScore,
-        setRound,
-        setSelectedTiles,
-        setIsFirstWord,
-        setIsGameEnd,
-        setTileData,
-        gridSize,
         totalScore,
         isGameEnd,
         restart,

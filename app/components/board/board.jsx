@@ -12,15 +12,14 @@ const Board = () => {
         setSelectedTiles,
         isFirstWord,
         setIsFirstWord,
-        setTileData,
         handleDelete,
     } = useGameContext();
 
+    // FOR POSSIBLE OTHER MODES -----
     useEffect(() => {
-        // This effect will run whenever tileData changes
-        // You can add any additional logic here if needed
         console.log("tileData useEffect");
     }, [tileData]);
+    // ------------------------------
 
     const isAdjacentTile = (index) => {
         if (selectedTiles.length === 0) return true;
@@ -35,7 +34,7 @@ const Board = () => {
         );
     };
 
-    const handleTilePress = (index, letter, value, modifier) => {
+    const handleTilePress = (index) => {
         if (
             !selectedTiles.includes(index) &&
             (isAdjacentTile(index) || isFirstWord)
@@ -48,7 +47,7 @@ const Board = () => {
         }
     };
 
-    // Ensure gridSize is a number
+    // Ensure gridSize is a number, defaults to 6
     const numericGridSize = Number(gridSize) || 6;
     const boardWidth = numericGridSize * 54;
 
@@ -60,14 +59,7 @@ const Board = () => {
                     letter={tile.letter}
                     value={tile.value}
                     modifier={tile.modifier}
-                    onPress={() =>
-                        handleTilePress(
-                            index,
-                            tile.letter,
-                            tile.value,
-                            tile.modifier
-                        )
-                    }
+                    onPress={() => handleTilePress(index)}
                     isSelected={selectedTiles.includes(index)}
                 />
             ))}

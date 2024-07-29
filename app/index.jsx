@@ -13,14 +13,6 @@ import generateTileData from "./components/board/TileCreator";
 export default function App() {
     const {
         isGameEnd,
-        setIsGameEnd,
-        setIsPaused,
-        setTotalScore,
-        setRound,
-        setSelectedTiles,
-        setIsFirstWord,
-        setTileData,
-        gridSize,
         restart,
     } = useGameContext();
     const router = useRouter();

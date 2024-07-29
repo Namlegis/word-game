@@ -5,9 +5,6 @@ import generateTileData from "./components/board/TileCreator.jsx";
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
-    // const [currentWord, setCurrentWord] = useState("");
-    // const [currentMods, setCurrentMods] = useState("");
-    // const [currentScore, setCurrentScore] = useState(0);
     const [totalScore, setTotalScore] = useState(0);
     const [gridSize, setGridSize] = useState(6);
     const [isWordInvalid, setIsWordInvalid] = useState(false);
@@ -38,6 +35,7 @@ export const GameProvider = ({ children }) => {
     };
 
     // get currentWord, currentScore, and currentMods from selectedTiles
+    // useMemo saves the outcome of the function until one of the datasets changes
     const currentWord = useMemo(
         () => selectedTiles.map((index) => tileData[index].letter).join(""),
         [selectedTiles, tileData]
