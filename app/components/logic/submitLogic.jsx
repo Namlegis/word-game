@@ -4,7 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useGameContext } from "../../GameContext";
 import { saveScore } from "../../../scoreStorage";
 import generateTileData from "../board/TileCreator";
-import wordList from "./wordList.json";
+import wordList from "../../../wordList.json";
 
 const submitLogic = () => {
     const {

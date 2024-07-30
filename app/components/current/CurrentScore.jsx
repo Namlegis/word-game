@@ -1,30 +1,21 @@
 // components/CurrentScore.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useGameContext } from '../../GameContext';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useGameContext } from "../../GameContext";
+import { lightTheme, darkTheme, createStyles } from "../../styles/styles";
 
 const CurrentScore = () => {
-    const { currentScore, currentMods } = useGameContext();
+    const { currentScore, currentMods, isDarkMode } = useGameContext();
+
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
 
     return (
-        <View style={styles.container}>
+        <View style={styles.currentScoreContainer}>
             <Text style={styles.score}>Current Score: {currentScore}</Text>
-            <Text style={styles.mods}>Modifiers: {currentMods}</Text>
+            <Text style={styles.mods}>Bonus: {currentMods}</Text>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 10,
-    },
-    score: {
-        fontSize: 18,
-    },
-    mods: {
-        fontSize: 14,
-        color: 'gray',
-    },
-});
 
 export default CurrentScore;

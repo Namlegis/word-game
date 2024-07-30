@@ -8,7 +8,7 @@ const CurrentWord = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.word}>{currentWord}</Text>
+            <Text style={styles.word}>{currentWord} </Text>
         </View>
     );
 };

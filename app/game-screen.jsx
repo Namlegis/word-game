@@ -12,22 +12,33 @@ import RoundCounter from "./components/RoundCounter.jsx";
 import PauseOverlay from "./components/topBar/PauseOverlay.jsx";
 import EndGameOverlay from "./components/GameEndOverlay.jsx";
 import InvalidWordOverlay from "./components/InvalidWordOverlay.jsx";
+import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx";
 
 const GameScreen = () => {
-    const { totalScore } = useGameContext();
-
+    const { totalScore, isDarkMode, submitIsLeft } = useGameContext();
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
 
     return (
-        <View style={styles.container}>
+        <View style={styles.gameContainer}>
             <TopBar totalScore={totalScore} />
-            <View style={styles.content}>
+            <View style={styles.gameContent}>
                 <RoundCounter />
                 <CurrentWord />
                 <CurrentScore />
                 <Board />
-                <View style={styles.buttonContainer}>
-                    <SubmitButton />
-                    <DeleteButton />
+                <View style={styles.gameButtonContainer}>
+                    {submitIsLeft ? (
+                        <>
+                            <SubmitButton />
+                            <DeleteButton />
+                        </>
+                    ) : (
+                        <>
+                            <DeleteButton />
+                            <SubmitButton />
+                        </>
+                    )}
                 </View>
             </View>
             <PauseOverlay />
@@ -36,23 +47,5 @@ const GameScreen = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    content: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 10,
-    },
-    buttonContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        width: "100%",
-        marginTop: 20,
-    },
-});
 
 export default GameScreen;

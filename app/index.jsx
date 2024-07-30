@@ -8,13 +8,15 @@ import {
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { useGameContext } from "./GameContext.jsx";
-import generateTileData from "./components/board/TileCreator";
+import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx"
+
 
 export default function App() {
-    const {
-        isGameEnd,
-        restart,
-    } = useGameContext();
+    const { isGameEnd, restart, isDarkMode } = useGameContext();
+
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
+
     const router = useRouter();
 
     const handleResumeGame = () => {
@@ -65,29 +67,3 @@ export default function App() {
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#f0f0f0",
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: "bold",
-        marginBottom: 30,
-    },
-    button: {
-        backgroundColor: "#4CAF50",
-        padding: 15,
-        marginVertical: 10,
-        width: 200,
-        alignItems: "center",
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: "white",
-        fontSize: 18,
-    },
-});

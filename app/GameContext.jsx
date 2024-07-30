@@ -14,6 +14,16 @@ export const GameProvider = ({ children }) => {
     const [round, setRound] = useState(1);
     const [isPaused, setIsPaused] = useState(false);
     const [isGameEnd, setIsGameEnd] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [submitIsLeft, setSubmitIsLeft] = useState(false)
+
+    const toggleTheme = () => {
+        setIsDarkMode(prevMode => !prevMode);
+    };
+
+    const toggleSubmitSide = () => {
+        setSubmitIsLeft(prevSide => !prevSide)
+    }
 
     const handleDelete = () => {
         if (selectedTiles.length > 0) {
@@ -99,7 +109,11 @@ export const GameProvider = ({ children }) => {
                 isGameEnd,
                 setIsGameEnd,
                 restart,
-                handleDelete
+                handleDelete,
+                isDarkMode,
+                toggleTheme,
+                submitIsLeft,
+                toggleSubmitSide
             }}
         >
             {children}
