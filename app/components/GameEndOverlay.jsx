@@ -12,7 +12,7 @@ const EndGameOverlay = () => {
     } = useGameContext();
 
     const handleRestart = () => {
-        restart;
+        restart();
     };
 
     const handleMainMenu = () => {

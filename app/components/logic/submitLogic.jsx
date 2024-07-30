@@ -1,10 +1,10 @@
 // components/logic/submitLogic.jsx
 
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect, useMemo } from "react";
 import { useGameContext } from "../../GameContext";
 import { saveScore } from "../../../scoreStorage";
 import generateTileData from "../board/TileCreator";
+import wordList from "./wordList.json";
 
 const submitLogic = () => {
     const {
@@ -23,6 +23,10 @@ const submitLogic = () => {
         isGameEnd,
         totalScore,
     } = useGameContext();
+
+    const wordSet = useMemo(() => {
+        return new Set(wordList.map((item) => item.word.toLowerCase()));
+    }, []);
 
     useEffect(() => {
         const saveGameScore = async () => {
@@ -43,32 +47,23 @@ const submitLogic = () => {
         setTileData(newTileData);
     };
 
-    const handleSubmit = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${currentWord}`
-            );
-            if (response.data && response.data.length > 0) {
-                setTotalScore((prev) => prev + currentScore);
-                setSelectedTiles([]);
-                setIsFirstWord(true);
-                if (round < 7) {
-                    setRound((prev) => prev + 1);
-                    replaceUsedTiles();
-                    console.log("TileData set");
-                } else {
-                    setIsGameEnd(true);
-                }
-            }
-        } catch (error) {
-            if (error.response && error.response.status === 404) {
-                setIsWordInvalid(true);
-                setTimeout(() => {
-                    setIsWordInvalid(false);
-                }, 500);
+    const handleSubmit = () => {
+        if (wordSet.has(currentWord.toLowerCase())) {
+            setTotalScore((prev) => prev + currentScore);
+            setSelectedTiles([]);
+            setIsFirstWord(true);
+            if (round < 7) {
+                setRound((prev) => prev + 1);
+                replaceUsedTiles();
+                console.log("TileData set");
             } else {
-                console.error("Error:", error);
+                setIsGameEnd(true);
             }
+        } else {
+            setIsWordInvalid(true);
+            setTimeout(() => {
+                setIsWordInvalid(false);
+            }, 500);
         }
     };
 
