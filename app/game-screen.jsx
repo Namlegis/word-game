@@ -1,6 +1,6 @@
 // app/game-screen.js
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useGameContext } from "./GameContext.jsx";
 import Board from "./components/board/board.jsx";
 import CurrentWord from "./components/current/CurrentWord.jsx";

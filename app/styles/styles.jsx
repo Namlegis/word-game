@@ -9,10 +9,15 @@ export const lightTheme = {
     tileBorderColor: "#BDBDBD",
     doubleLetterColor: "lightblue",
     doubleLetterTextColor: "blue",
+    tripleLetterColor: "#CBC3E3",
+    tripleLetterTextColor: "#301934",
     doubleWordColor: "lightgreen",
     doubleWordTextColor: "green",
     selectedTileColor: "yellow",
     buttonTextColor: "#FFFFFF",
+    completedRoundColor: "#3498db",
+    currentRoundColor: "#2ecc71",
+    futureRoundColor: "#bdc3c7",
 };
 
 export const darkTheme = {
@@ -24,10 +29,15 @@ export const darkTheme = {
     tileBorderColor: "#616161",
     doubleLetterColor: "#1565C0",
     doubleLetterTextColor: "#90CAF9",
+    tripleLetterTextColor: "#CBC3E3",
+    tripleLetterColor: "#301934",
     doubleWordColor: "#2E7D32",
     doubleWordTextColor: "#A5D6A7",
     selectedTileColor: "#FBC02D",
     buttonTextColor: "#000000",
+    completedRoundColor: "#2980b9",
+    currentRoundColor: "#27ae60",
+    futureRoundColor: "#7f8c8d",
 };
 
 export const createStyles = (theme) =>
@@ -85,6 +95,8 @@ export const createStyles = (theme) =>
             justifyContent: "center",
             alignItems: "center",
         },
+
+        // GAME SCREEN
         gameContainer: {
             flex: 1,
             backgroundColor: theme.backgroundColor,
@@ -101,6 +113,8 @@ export const createStyles = (theme) =>
             width: "100%",
             marginTop: 20,
         },
+
+        // TILE STYLES
         tile: {
             width: 50,
             height: 50,
@@ -132,10 +146,18 @@ export const createStyles = (theme) =>
         doubleWordText: {
             color: theme.doubleWordTextColor,
         },
+        tripleLetterText: {
+            color: theme.tripleLetterTextColor,
+        },
+        tripleLetterTile: {
+            backgroundColor: theme.tripleLetterColor,
+        },
         selectedTile: {
             backgroundColor: theme.selectedTileColor,
         },
-        currentScoreContainer: {
+
+        // GAME INFORMATION STYLES
+        currentContainer: {
             marginBottom: 10,
         },
         score: {
@@ -145,5 +167,39 @@ export const createStyles = (theme) =>
         mods: {
             fontSize: 14,
             color: theme.textColor,
+        },
+        roundContainer: {
+            padding: 10,
+        },
+        roundText: {
+            fontSize: 18,
+            fontWeight: "bold",
+            color: theme.textColor,
+        },
+        word: {
+            fontSize: 24,
+            fontWeight: "bold",
+            color: theme.textColor,
+        },
+        roundContainer: {
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginVertical: 10,
+        },
+        counter: {
+            width: 15,
+            height: 15,
+            borderRadius: 7.5,
+            marginHorizontal: 5,
+        },
+        completedCounter: {
+            backgroundColor: theme.completedRoundColor,
+        },
+        currentCounter: {
+            backgroundColor: theme.currentRoundColor,
+        },
+        notCompCounter: {
+            backgroundColor: theme.futureRoundColor,
         },
     });

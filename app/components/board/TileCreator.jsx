@@ -59,6 +59,8 @@ const getRandomModifier = () => {
     if (randomValue < 0.1) {
         return "DL";
     } else if (randomValue < 0.15) {
+        return "TL";
+    } else if (randomValue < 0.2) {
         return "DW";
     } else {
         return null;

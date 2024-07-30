@@ -2,19 +2,22 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useGameContext } from '../../GameContext';
+import { lightTheme, darkTheme, createStyles } from "../../styles/styles";
 
 const CurrentWord = () => {
-    const { currentWord } = useGameContext();
+    const { currentWord, isDarkMode } = useGameContext();
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
 
     return (
-        <View style={styles.container}>
+        <View style={styles.currentContainer}>
             <Text style={styles.word}>{currentWord} </Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    currentContainer: {
         marginBottom: 10,
     },
     word: {

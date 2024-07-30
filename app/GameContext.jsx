@@ -15,19 +15,19 @@ export const GameProvider = ({ children }) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isGameEnd, setIsGameEnd] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [submitIsLeft, setSubmitIsLeft] = useState(false)
+    const [submitIsLeft, setSubmitIsLeft] = useState(true);
 
     const toggleTheme = () => {
-        setIsDarkMode(prevMode => !prevMode);
+        setIsDarkMode((prevMode) => !prevMode);
     };
 
     const toggleSubmitSide = () => {
-        setSubmitIsLeft(prevSide => !prevSide)
-    }
+        setSubmitIsLeft((prevSide) => !prevSide);
+    };
 
     const handleDelete = () => {
         if (selectedTiles.length > 0) {
-            setSelectedTiles(prev => prev.slice(0, -1));
+            setSelectedTiles((prev) => prev.slice(0, -1));
             if (selectedTiles.length === 1) {
                 setIsFirstWord(true);
             }
@@ -75,13 +75,21 @@ export const GameProvider = ({ children }) => {
             // Add to the score
             score += letterScore;
 
+            
             // Check for word multipliers
-            if (tile.modifier === "DW") wordMultiplier *= 2;
-            if (tile.modifier === "TW") wordMultiplier *= 3;
+            if (tile.modifier === "DW") wordMultiplier += 2;
+            if (tile.modifier === "TW") wordMultiplier += 3;
         });
 
+        score *= wordMultiplier;
+
+        // Add multiplier for longer words
+        if (selectedTiles.length >= 5) {
+            score *= 1 + (selectedTiles.length - 4) * 0.5;
+        }
+
         // Apply word multiplier
-        return score * wordMultiplier;
+        return Math.floor(score);
     }, [selectedTiles, tileData]);
 
     return (
@@ -113,7 +121,7 @@ export const GameProvider = ({ children }) => {
                 isDarkMode,
                 toggleTheme,
                 submitIsLeft,
-                toggleSubmitSide
+                toggleSubmitSide,
             }}
         >
             {children}
