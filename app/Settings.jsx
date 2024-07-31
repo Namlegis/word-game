@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Switch } from "react-native";
+import { View, Text, Switch, TouchableOpacity } from "react-native";
 import { useGameContext } from "./GameContext";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles";
 import { resetScore } from "../scoreStorage";
