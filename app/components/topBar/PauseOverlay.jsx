@@ -2,22 +2,13 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useGameContext } from "../../GameContext";
-import generateTileData from "../board/TileCreator";
 import { router } from "expo-router";
+import { lightTheme, darkTheme, createStyles } from "../../styles/styles"
 
 const PauseOverlay = () => {
-    const {
-        isPaused,
-        setIsPaused,
-        setTotalScore,
-        setRound,
-        setSelectedTiles,
-        setIsFirstWord,
-        setIsGameStarted,
-        setTileData,
-        gridSize,
-        restart
-    } = useGameContext();
+    const { isPaused, setIsPaused, restart, isDarkMode } = useGameContext();
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
 
     const handleResume = () => setIsPaused(false);
 
@@ -27,6 +18,10 @@ const PauseOverlay = () => {
         // TODO: Implement settings logic
         console.log("Settings clicked");
         router.push("/Settings");
+    };
+
+    const handleInstructions = () => {
+        router.push("/Instructions");
     };
 
     const handleMainMenu = () => {
@@ -49,6 +44,12 @@ const PauseOverlay = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleSettings}>
                 <Text style={styles.buttonText}>Settings</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[styles.button, styles.instructionsButton]}
+                onPress={handleInstructions}
+            >
+                <Text style={styles.buttonText}>Instructions</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleMainMenu}>
                 <Text style={styles.buttonText}>Save & Exit</Text>

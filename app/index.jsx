@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import {
     Text,
     View,
-    StyleSheet,
     SafeAreaView,
     TouchableOpacity,
 } from "react-native";
@@ -31,6 +30,9 @@ export default function App() {
     const handleSettings = () => {
         router.push("/Settings");
     };
+    const handleInstructions = () => {
+        router.push("/Instructions");
+    };
 
     const handleHighScores = () => {
         router.push("/HighScores");
@@ -56,6 +58,12 @@ export default function App() {
                     onPress={handleSettings}
                 >
                     <Text style={styles.buttonText}>Settings</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.button, styles.instructionsButton]}
+                    onPress={handleInstructions}
+                >
+                    <Text style={styles.buttonText}>Instructions</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}

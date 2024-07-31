@@ -18,10 +18,11 @@ export const lightTheme = {
     completedRoundColor: "#3498db",
     currentRoundColor: "#2ecc71",
     futureRoundColor: "#bdc3c7",
+    instructionsButton: "#301934",
 };
 
 export const darkTheme = {
-    backgroundColor: "#121212",
+    backgroundColor: "#444444",
     textColor: "#FFFFFF",
     primaryColor: "#81C784",
     secondaryColor: "#FFD54F",
@@ -38,6 +39,7 @@ export const darkTheme = {
     completedRoundColor: "#2980b9",
     currentRoundColor: "#27ae60",
     futureRoundColor: "#7f8c8d",
+    instructionsButton: "#CBC3E3",
 };
 
 export const createStyles = (theme) =>
@@ -65,6 +67,9 @@ export const createStyles = (theme) =>
         buttonText: {
             color: theme.buttonTextColor,
             fontSize: 18,
+        },
+        instructionsButton: {
+            backgroundColor: theme.instructionsButton,
         },
         tile: {
             width: 50,
@@ -201,5 +206,34 @@ export const createStyles = (theme) =>
         },
         notCompCounter: {
             backgroundColor: theme.futureRoundColor,
+        },
+
+        // Instructions
+        instructionsPageContainer: {
+            flex: 1,
+            alignItems: "center",
+            backgroundColor: theme.backgroundColor,
+        },
+        instructionsContainer: {
+            marginHorizontal: 20,
+        },
+        sectionTitle: {
+            fontSize: 24,
+            fontWeight: "bold",
+            color: theme.textColor,
+        },
+        instructionsText: {
+            fontSize: 18,
+            color: theme.textColor,
+            paddingVertical: 5,
+        },
+        blue: {
+            color: theme.doubleLetterTextColor,
+        },
+        purple: {
+            color: theme.tripleLetterTextColor,
+        },
+        green: {
+            color: theme.doubleWordTextColor,
         },
     });
