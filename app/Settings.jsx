@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Switch } from "react-native";
 import { useGameContext } from "./GameContext";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles";
+import { resetScore } from "../scoreStorage";
 
 const SettingsPage = () => {
     const { toggleTheme, isDarkMode, toggleSubmitSide, submitIsLeft } =
@@ -26,6 +27,12 @@ const SettingsPage = () => {
                 onValueChange={toggleSubmitSide}
                 value={submitIsLeft}
             />
+            <TouchableOpacity
+                    style={styles.button}
+                    onPress={resetScore}
+                >
+                    <Text style={styles.buttonText}>Reset Scores</Text>
+                </TouchableOpacity>
         </View>
     );
 };

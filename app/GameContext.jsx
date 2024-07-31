@@ -85,7 +85,7 @@ export const GameProvider = ({ children }) => {
 
         // Add multiplier for longer words
         if (selectedTiles.length >= 5) {
-            score *= 1 + (selectedTiles.length - 4) * 0.5;
+            score += (selectedTiles.length - 4) * 15;
         }
 
         // Apply word multiplier
