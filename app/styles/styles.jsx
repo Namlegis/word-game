@@ -1,10 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+import DeleteButton from "../components/buttons/DeleteButton";
+
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export const lightTheme = {
     backgroundColor: "#FFFFFF",
     textColor: "#000000",
-    primaryColor: "#4CAF50",
-    secondaryColor: "#FFA000",
+    primaryColor: "#5DD39E",
+    secondaryColor: "#348AA7",
+    tertiaryColor: "#F39C12",
     tileColor: "#E0E0E0",
     tileBorderColor: "#BDBDBD",
     doubleLetterColor: "lightblue",
@@ -24,8 +30,8 @@ export const lightTheme = {
 export const darkTheme = {
     backgroundColor: "#444444",
     textColor: "#FFFFFF",
-    primaryColor: "#81C784",
-    secondaryColor: "#FFD54F",
+    primaryColor: "#348AA7",
+    secondaryColor: "#5DD39E",
     tileColor: "#424242",
     tileBorderColor: "#616161",
     doubleLetterColor: "#1565C0",
@@ -44,6 +50,7 @@ export const darkTheme = {
 
 export const createStyles = (theme) =>
     StyleSheet.create({
+        // General Styles
         container: {
             flex: 1,
             justifyContent: "center",
@@ -60,7 +67,7 @@ export const createStyles = (theme) =>
             backgroundColor: theme.primaryColor,
             padding: 15,
             marginVertical: 10,
-            width: 200,
+            width: windowWidth/2,
             alignItems: "center",
             borderRadius: 5,
         },
@@ -71,37 +78,8 @@ export const createStyles = (theme) =>
         instructionsButton: {
             backgroundColor: theme.instructionsButton,
         },
-        tile: {
-            width: 50,
-            height: 50,
-            borderWidth: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            margin: 2,
-            backgroundColor: theme.tileColor,
-            borderColor: theme.tileBorderColor,
-        },
-        letter: {
-            fontSize: 20,
-            fontWeight: "bold",
-            color: theme.textColor,
-        },
-        value: {
-            fontSize: 12,
-            color: theme.textColor,
-        },
-        overlay: {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            justifyContent: "center",
-            alignItems: "center",
-        },
 
-        // GAME SCREEN
+        // Game Screen Styles
         gameContainer: {
             flex: 1,
             backgroundColor: theme.backgroundColor,
@@ -109,17 +87,35 @@ export const createStyles = (theme) =>
         gameContent: {
             flex: 1,
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             padding: 10,
         },
         gameButtonContainer: {
             flexDirection: "row",
             justifyContent: "space-around",
             width: "100%",
-            marginTop: 20,
+            padding: 20,
+        },
+        gameButton: {
+            maxWidth: windowWidth/3,
+            backgroundColor: theme.primaryColor
+        },
+        deleteButton: {
+            backgroundColor: theme.tertiaryColor
         },
 
-        // TILE STYLES
+        // Top Bar Styles
+        topBar: {
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 20,
+            paddingVertical: 8,
+            backgroundColor: theme.backgroundColor,
+        },
+
+        // Tile Styles
         tile: {
             width: 50,
             height: 50,
@@ -161,9 +157,12 @@ export const createStyles = (theme) =>
             backgroundColor: theme.selectedTileColor,
         },
 
-        // GAME INFORMATION STYLES
+        // Game Information Styles
         currentContainer: {
             marginBottom: 10,
+        },
+        gameInfoContainer:{
+
         },
         score: {
             fontSize: 18,
@@ -174,6 +173,10 @@ export const createStyles = (theme) =>
             color: theme.textColor,
         },
         roundContainer: {
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            // marginVertical: 20,
             padding: 10,
         },
         roundText: {
@@ -186,12 +189,8 @@ export const createStyles = (theme) =>
             fontWeight: "bold",
             color: theme.textColor,
         },
-        roundContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginVertical: 10,
-        },
+
+        // Round Counters
         counter: {
             width: 15,
             height: 15,
@@ -207,8 +206,9 @@ export const createStyles = (theme) =>
         notCompCounter: {
             backgroundColor: theme.futureRoundColor,
         },
+        
 
-        // Instructions
+        // Instructions Styles
         instructionsPageContainer: {
             flex: 1,
             alignItems: "center",
@@ -235,5 +235,45 @@ export const createStyles = (theme) =>
         },
         green: {
             color: theme.doubleWordTextColor,
+        },
+
+        // Settings Styles
+        settingsContainer: {
+            flex: 1,
+            alignItems: "center",
+            backgroundColor: theme.backgroundColor,
+        },
+        settingsContentContainer: {
+            justifyContent: "center",
+            paddingHorizontal: 20,
+            marginBottom: 30,
+        },
+        settingCont: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+        },
+        settingText: {
+            color: theme.textColor,
+            fontSize: 24,
+        },
+        settingsTitle: {
+            fontSize: 32,
+            fontWeight: "bold",
+            marginVertical: 30,
+            color: theme.textColor,
+        },
+
+        // Overlay Styles
+        overlay: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            justifyContent: "center",
+            alignItems: "center",
         },
     });

@@ -1,5 +1,6 @@
 // GameContext.js
 import React, { createContext, useState, useContext, useMemo } from "react";
+
 import generateTileData from "./components/board/TileCreator.jsx";
 
 const GameContext = createContext();
@@ -15,14 +16,14 @@ export const GameProvider = ({ children }) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isGameEnd, setIsGameEnd] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [submitIsLeft, setSubmitIsLeft] = useState(true);
+    const [submitIsRight, setSubmitIsRight] = useState(false);
 
     const toggleTheme = () => {
         setIsDarkMode((prevMode) => !prevMode);
     };
 
     const toggleSubmitSide = () => {
-        setSubmitIsLeft((prevSide) => !prevSide);
+        setSubmitIsRight((prevSide) => !prevSide);
     };
 
     const handleDelete = () => {
@@ -75,7 +76,6 @@ export const GameProvider = ({ children }) => {
             // Add to the score
             score += letterScore;
 
-            
             // Check for word multipliers
             if (tile.modifier === "DW") wordMultiplier += 2;
             if (tile.modifier === "TW") wordMultiplier += 3;
@@ -120,7 +120,7 @@ export const GameProvider = ({ children }) => {
                 handleDelete,
                 isDarkMode,
                 toggleTheme,
-                submitIsLeft,
+                submitIsRight,
                 toggleSubmitSide,
             }}
         >

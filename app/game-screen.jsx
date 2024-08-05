@@ -15,28 +15,31 @@ import InvalidWordOverlay from "./components/InvalidWordOverlay.jsx";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx";
 
 const GameScreen = () => {
-    const { totalScore, isDarkMode, submitIsLeft } = useGameContext();
+    const { isDarkMode, submitIsRight } = useGameContext();
     const theme = isDarkMode ? darkTheme : lightTheme;
     const styles = createStyles(theme);
 
     return (
         <View style={styles.gameContainer}>
-            <TopBar totalScore={totalScore} />
+            <TopBar />
             <View style={styles.gameContent}>
-                <RoundCounter />
-                <CurrentWord />
-                <CurrentScore />
+                <View style={styles.gameInfoContainer}>
+                    <RoundCounter />
+                    <CurrentWord />
+                    <CurrentScore />
+                </View>
+
                 <Board />
                 <View style={styles.gameButtonContainer}>
-                    {submitIsLeft ? (
+                    {submitIsRight ? (
                         <>
-                            <SubmitButton />
                             <DeleteButton />
+                            <SubmitButton />
                         </>
                     ) : (
                         <>
-                            <DeleteButton />
                             <SubmitButton />
+                            <DeleteButton />
                         </>
                     )}
                 </View>
