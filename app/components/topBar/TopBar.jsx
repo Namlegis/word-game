@@ -16,10 +16,9 @@ const TopBar = () => {
         <View style={styles.topBar}>
             {/* Render the TotalScore component */}
             <TotalScore score={totalScore} />
-
             {/* Render the onPause component */}
             <TouchableOpacity onPress={()=> setIsPaused(!isPaused)}>
-                <Ionicons name="pause" size={36} color="black" />
+                <Ionicons name="pause" size={36} color={theme.textColor} />
             </TouchableOpacity>
         </View>
     );

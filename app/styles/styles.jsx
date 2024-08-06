@@ -1,51 +1,53 @@
 import { StyleSheet, Dimensions } from "react-native";
-import DeleteButton from "../components/buttons/DeleteButton";
-
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+const boardWidth = windowWidth * 0.9;
+
 export const lightTheme = {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#DFF6EC",
     textColor: "#000000",
-    primaryColor: "#5DD39E",
+    primaryColor: "#279061",
     secondaryColor: "#348AA7",
-    tertiaryColor: "#F39C12",
-    tileColor: "#E0E0E0",
+    tertiaryColor: "#FF5733",
+    tileColor: "rgba(191,237,217, 0.2)",
     tileBorderColor: "#BDBDBD",
-    doubleLetterColor: "lightblue",
-    doubleLetterTextColor: "blue",
+    doubleLetterColor: "#B1DAE7",
+    doubleLetterTextColor: "black",
     tripleLetterColor: "#CBC3E3",
-    tripleLetterTextColor: "#301934",
-    doubleWordColor: "lightgreen",
-    doubleWordTextColor: "green",
-    selectedTileColor: "yellow",
+    tripleLetterTextColor: "black",
+    doubleWordColor: "#FF9785",
+    doubleWordTextColor: "black",
+    selectedTileColor: "#FFD700",
     buttonTextColor: "#FFFFFF",
     completedRoundColor: "#3498db",
-    currentRoundColor: "#2ecc71",
+    currentRoundColor: "#279061",
     futureRoundColor: "#bdc3c7",
     instructionsButton: "#301934",
+    barColor: "rgba(39,144,97,0.5)"
 };
 
 export const darkTheme = {
-    backgroundColor: "#444444",
+    backgroundColor: "#1E2E2A",
     textColor: "#FFFFFF",
     primaryColor: "#348AA7",
     secondaryColor: "#5DD39E",
-    tileColor: "#424242",
-    tileBorderColor: "#616161",
-    doubleLetterColor: "#1565C0",
-    doubleLetterTextColor: "#90CAF9",
-    tripleLetterTextColor: "#CBC3E3",
-    tripleLetterColor: "#301934",
-    doubleWordColor: "#2E7D32",
-    doubleWordTextColor: "#A5D6A7",
-    selectedTileColor: "#FBC02D",
-    buttonTextColor: "#000000",
-    completedRoundColor: "#2980b9",
-    currentRoundColor: "#27ae60",
-    futureRoundColor: "#7f8c8d",
-    instructionsButton: "#CBC3E3",
+    tertiaryColor: "#B33B24",
+    tileColor: "rgba(52,138,167, 0.2)",
+    tileBorderColor: "#A5A5A5",
+    doubleLetterColor: "#6E9CAF",
+    doubleLetterTextColor: "#FFFFFF",
+    tripleLetterColor: "#7E6B9E",
+    tripleLetterTextColor: "#FFFFFF",
+    doubleWordColor: "#B35E4E",
+    doubleWordTextColor: "#FFFFFF",
+    selectedTileColor: "#B8860B",
+    buttonTextColor: "#FFFFFF",
+    completedRoundColor: "#3498db",
+    currentRoundColor: "#2ecc71",
+    futureRoundColor: "#7F8C8D",
+    instructionsButton: "#7E6B9E",
 };
 
 export const createStyles = (theme) =>
@@ -67,7 +69,7 @@ export const createStyles = (theme) =>
             backgroundColor: theme.primaryColor,
             padding: 15,
             marginVertical: 10,
-            width: windowWidth/2,
+            width: windowWidth / 2,
             alignItems: "center",
             borderRadius: 5,
         },
@@ -79,7 +81,7 @@ export const createStyles = (theme) =>
             backgroundColor: theme.instructionsButton,
         },
 
-        // Game Screen Styles
+        // Game Screen Style
         gameContainer: {
             flex: 1,
             backgroundColor: theme.backgroundColor,
@@ -87,21 +89,35 @@ export const createStyles = (theme) =>
         gameContent: {
             flex: 1,
             alignItems: "center",
-            justifyContent: "flex-start",
-            padding: 10,
+            justifyContent: "space-evenly",
+            width: windowWidth,
+            height: windowHeight,
+        },
+        board: {
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly",
+            alignContent: "space-evenly",
+            width: boardWidth,
+            aspectRatio: 1,
+        },
+        boardBar:{
+            width: boardWidth,
+            height: 5,
+            backgroundColor: theme.barColor,
+            borderRadius: 5
         },
         gameButtonContainer: {
             flexDirection: "row",
-            justifyContent: "space-around",
-            width: "100%",
-            padding: 20,
+            justifyContent: "space-between",
+            width: boardWidth,
         },
         gameButton: {
-            maxWidth: windowWidth/3,
-            backgroundColor: theme.primaryColor
+            maxWidth: windowWidth * 0.4,
+            backgroundColor: theme.primaryColor,
         },
         deleteButton: {
-            backgroundColor: theme.tertiaryColor
+            backgroundColor: theme.tertiaryColor,
         },
 
         // Top Bar Styles
@@ -114,15 +130,31 @@ export const createStyles = (theme) =>
             paddingVertical: 8,
             backgroundColor: theme.backgroundColor,
         },
+        totalContainer: {
+            flexDirection: "row",
+            alignItems: "center",
+        },
+        totalLabel: {
+            fontSize: 16,
+            fontWeight: "bold",
+            marginRight: 8,
+            color: theme.textColor
+        },
+        totalScore: {
+            fontSize: 18,
+            fontWeight: "bold",
+            color: theme.textColor
+        },
 
         // Tile Styles
         tile: {
-            width: 50,
-            height: 50,
-            borderWidth: 1,
+            width: boardWidth / 6 - 6,
+            height: boardWidth / 6 - 6,
+            borderWidth: 0,
             justifyContent: "center",
             alignItems: "center",
-            margin: 2,
+            borderRadius: 5,
+            // margin: 2,
             backgroundColor: theme.tileColor,
             borderColor: theme.tileBorderColor,
         },
@@ -159,42 +191,36 @@ export const createStyles = (theme) =>
 
         // Game Information Styles
         currentContainer: {
-            marginBottom: 10,
+            marginVertical: 10,
+            width: windowWidth * 0.9,
+            alignItems: "center",
         },
-        gameInfoContainer:{
-
+        gameInfoContainer: {
+            justifyContent: "space-between",
+            alignItems: "center",
         },
         score: {
             fontSize: 18,
-            color: theme.textColor,
-        },
-        mods: {
-            fontSize: 14,
             color: theme.textColor,
         },
         roundContainer: {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            // marginVertical: 20,
-            padding: 10,
-        },
-        roundText: {
-            fontSize: 18,
-            fontWeight: "bold",
-            color: theme.textColor,
+            margin: 10,
         },
         word: {
             fontSize: 24,
             fontWeight: "bold",
             color: theme.textColor,
+            margin: 10
         },
 
         // Round Counters
         counter: {
-            width: 15,
-            height: 15,
-            borderRadius: 7.5,
+            width: 20,
+            height: 20,
+            borderRadius: 10,
             marginHorizontal: 5,
         },
         completedCounter: {
@@ -206,7 +232,6 @@ export const createStyles = (theme) =>
         notCompCounter: {
             backgroundColor: theme.futureRoundColor,
         },
-        
 
         // Instructions Styles
         instructionsPageContainer: {
@@ -272,7 +297,7 @@ export const createStyles = (theme) =>
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            backgroundColor: "rgba(200, 100, 100, 0.95)",
             justifyContent: "center",
             alignItems: "center",
         },

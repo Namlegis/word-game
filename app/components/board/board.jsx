@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useGameContext } from "../../GameContext.jsx";
 import Tile from "./Tile";
+import { lightTheme, darkTheme, createStyles } from "../../styles/styles.jsx";
 
 const Board = () => {
     const {
@@ -13,7 +14,12 @@ const Board = () => {
         isFirstWord,
         setIsFirstWord,
         handleDelete,
+        isDarkMode
     } = useGameContext();
+
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
+
 
     // FOR POSSIBLE OTHER MODES -----
     useEffect(() => {
@@ -47,12 +53,8 @@ const Board = () => {
         }
     };
 
-    // Ensure gridSize is a number, defaults to 6
-    const numericGridSize = Number(gridSize) || 6;
-    const boardWidth = numericGridSize * 54;
-
     return (
-        <View style={[styles.board, { width: boardWidth }]}>
+        <View style={styles.board}>
             {tileData.map((tile, index) => (
                 <Tile
                     key={index}
@@ -66,13 +68,5 @@ const Board = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    board: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-    },
-});
 
 export default Board;

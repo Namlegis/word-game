@@ -11,10 +11,7 @@ const CurrentScore = () => {
     const styles = createStyles(theme);
 
     return (
-        <View style={styles.currentContainer}>
             <Text style={styles.word}>Current Score: {currentScore}</Text>
-            <Text style={styles.mods}>Bonus: {currentMods}</Text>
-        </View>
     );
 };
 

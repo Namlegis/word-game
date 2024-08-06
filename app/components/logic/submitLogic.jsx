@@ -61,6 +61,7 @@ const submitLogic = () => {
             }
         } else {
             setIsWordInvalid(true);
+            setSelectedTiles([]);
             setTimeout(() => {
                 setIsWordInvalid(false);
             }, 500);

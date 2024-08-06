@@ -6,8 +6,14 @@ const RootLayout = () => {
     return (
         <GameProvider>
             <Stack>
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="game-screen" options={{ title: "Word Game" }} />
+                <Stack.Screen
+                    name="index"
+                    options={{ title: "Home", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="game-screen"
+                    options={{ title: "Word Game", headerShown: false }}
+                />
             </Stack>
         </GameProvider>
     );

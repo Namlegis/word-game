@@ -1,6 +1,7 @@
 // app/game-screen.js
 import React from "react";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useGameContext } from "./GameContext.jsx";
 import Board from "./components/board/board.jsx";
 import CurrentWord from "./components/current/CurrentWord.jsx";
@@ -20,16 +21,19 @@ const GameScreen = () => {
     const styles = createStyles(theme);
 
     return (
-        <View style={styles.gameContainer}>
+        <SafeAreaView style={styles.gameContainer}>
             <TopBar />
+
             <View style={styles.gameContent}>
                 <View style={styles.gameInfoContainer}>
                     <RoundCounter />
                     <CurrentWord />
                     <CurrentScore />
                 </View>
-
+                <View style={styles.boardBar}></View>
                 <Board />
+                <View style={styles.boardBar}></View>
+
                 <View style={styles.gameButtonContainer}>
                     {submitIsRight ? (
                         <>
@@ -47,7 +51,7 @@ const GameScreen = () => {
             <PauseOverlay />
             <EndGameOverlay />
             <InvalidWordOverlay />
-        </View>
+        </SafeAreaView>
     );
 };
 

@@ -1,29 +1,18 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { lightTheme, darkTheme, createStyles } from "../../styles/styles";
+import { useGameContext } from "../../GameContext";
 
 const TotalScore = ({ score }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Total Score:</Text>
-      <Text style={styles.score}>{score}</Text>
-    </View>
-  );
+    const { isDarkMode } = useGameContext();
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
+    return (
+        <View style={styles.totalContainer}>
+            <Text style={styles.totalLabel}>Total Score:</Text>
+            <Text style={styles.totalScore}>{score}</Text>
+        </View>
+    );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginRight: 8,
-  },
-  score: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default TotalScore;
