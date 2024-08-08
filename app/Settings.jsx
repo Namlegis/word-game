@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Switch, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, Switch, TouchableOpacity } from "react-native";
 import { useGameContext } from "./GameContext";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles";
 import { resetScore } from "../scoreStorage";
@@ -12,7 +12,9 @@ const SettingsPage = () => {
 
     return (
         <View style={styles.settingsContainer}>
-            <Text style={styles.settingsTitle}>Settings</Text>
+            <View style={styles.boardBar}></View>
+            <Text style={styles.title}>Settings</Text>
+            <View style={styles.boardBar}></View>
             <View style={styles.settingsContentContainer}>
                 <View style={styles.settingCont}>
                     <Text style={styles.settingText}>Dark Mode</Text>
@@ -35,18 +37,24 @@ const SettingsPage = () => {
                 <View style={styles.settingCont}>
                     <Text style={styles.settingText}>Submit Side</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
+                        trackColor={{
+                            false: lightTheme.primaryColor,
+                            true: darkTheme.primaryColor,
+                        }}
+                        thumbColor={
+                            isDarkMode
+                                ? darkTheme.secondaryColor
+                                : lightTheme.secondaryColor
+                        }
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleSubmitSide}
                         value={submitIsRight}
                     />
                 </View>
-
-                <TouchableOpacity style={styles.button} onPress={resetScore}>
-                    <Text style={styles.buttonText}>Reset Scores</Text>
-                </TouchableOpacity>
             </View>
+            <TouchableOpacity style={styles.button} onPress={resetScore}>
+                <Text style={styles.buttonText}>Reset Scores</Text>
+            </TouchableOpacity>
         </View>
     );
 };

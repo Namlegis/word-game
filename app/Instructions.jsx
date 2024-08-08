@@ -11,8 +11,9 @@ const Instructions = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.instructionsPageContainer}>
+            <View style={styles.boardBar}></View>
             <Text style={styles.title}>How to Play!</Text>
-
+            <View style={styles.boardBar}></View>
             <View style={styles.instructionsContainer}>
                 <Text style={styles.sectionTitle}>Objective</Text>
                 <Text style={styles.instructionsText}>
@@ -34,7 +35,7 @@ const Instructions = () => {
                 </Text>
                 <Text style={[styles.instructionsText, styles.blue]}>     Blue = Double Letter (DL)</Text>
                 <Text style={[styles.instructionsText, styles.purple]}>     Purple = Triple Letter (TL)</Text>
-                <Text style={[styles.instructionsText, styles.green]}>     Green = Double Word (DW)</Text>
+                <Text style={[styles.instructionsText, styles.red]}>     Red = Double Word (DW)</Text>
                 <Text style={styles.instructionsText}>
                     5. Words longer than 4 letters get additional bonuses.
                 </Text>

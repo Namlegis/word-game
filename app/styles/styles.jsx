@@ -1,10 +1,12 @@
 import { StyleSheet, Dimensions } from "react-native";
 
+// Get window width
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
+// Create variable for board width, based on window width (This works well for phones in vertical orientation)
 const boardWidth = windowWidth * 0.9;
 
+// Define color themes
 export const lightTheme = {
     backgroundColor: "#DFF6EC",
     textColor: "#000000",
@@ -25,7 +27,7 @@ export const lightTheme = {
     currentRoundColor: "#279061",
     futureRoundColor: "#bdc3c7",
     instructionsButton: "#301934",
-    barColor: "rgba(39,144,97,0.5)"
+    barColor: "rgba(39,144,97,0.5)",
 };
 
 export const darkTheme = {
@@ -48,6 +50,7 @@ export const darkTheme = {
     currentRoundColor: "#2ecc71",
     futureRoundColor: "#7F8C8D",
     instructionsButton: "#7E6B9E",
+    barColor: "rgba(39,144,97,0.5)",
 };
 
 export const createStyles = (theme) =>
@@ -62,14 +65,14 @@ export const createStyles = (theme) =>
         title: {
             fontSize: 32,
             fontWeight: "bold",
-            marginBottom: 30,
+            margin: 10,
             color: theme.textColor,
         },
         button: {
             backgroundColor: theme.primaryColor,
             padding: 15,
             marginVertical: 10,
-            width: windowWidth / 2,
+            width: windowWidth * 0.5,
             alignItems: "center",
             borderRadius: 5,
         },
@@ -90,8 +93,6 @@ export const createStyles = (theme) =>
             flex: 1,
             alignItems: "center",
             justifyContent: "space-evenly",
-            width: windowWidth,
-            height: windowHeight,
         },
         board: {
             flexDirection: "row",
@@ -101,11 +102,11 @@ export const createStyles = (theme) =>
             width: boardWidth,
             aspectRatio: 1,
         },
-        boardBar:{
+        boardBar: {
             width: boardWidth,
             height: 5,
             backgroundColor: theme.barColor,
-            borderRadius: 5
+            borderRadius: 5,
         },
         gameButtonContainer: {
             flexDirection: "row",
@@ -127,7 +128,7 @@ export const createStyles = (theme) =>
             justifyContent: "space-between",
             alignItems: "center",
             paddingHorizontal: 20,
-            paddingVertical: 8,
+            paddingVertical: 10,
             backgroundColor: theme.backgroundColor,
         },
         totalContainer: {
@@ -138,12 +139,12 @@ export const createStyles = (theme) =>
             fontSize: 16,
             fontWeight: "bold",
             marginRight: 8,
-            color: theme.textColor
+            color: theme.textColor,
         },
         totalScore: {
             fontSize: 18,
             fontWeight: "bold",
-            color: theme.textColor
+            color: theme.textColor,
         },
 
         // Tile Styles
@@ -154,7 +155,6 @@ export const createStyles = (theme) =>
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 5,
-            // margin: 2,
             backgroundColor: theme.tileColor,
             borderColor: theme.tileBorderColor,
         },
@@ -213,7 +213,7 @@ export const createStyles = (theme) =>
             fontSize: 24,
             fontWeight: "bold",
             color: theme.textColor,
-            margin: 10
+            margin: 10,
         },
 
         // Round Counters
@@ -235,12 +235,13 @@ export const createStyles = (theme) =>
 
         // Instructions Styles
         instructionsPageContainer: {
-            flex: 1,
+            flexGrow: 1,
             alignItems: "center",
             backgroundColor: theme.backgroundColor,
+            paddingVertical: 10,
         },
         instructionsContainer: {
-            marginHorizontal: 20,
+            margin: 20,
         },
         sectionTitle: {
             fontSize: 24,
@@ -253,13 +254,13 @@ export const createStyles = (theme) =>
             paddingVertical: 5,
         },
         blue: {
-            color: theme.doubleLetterTextColor,
+            color: darkTheme.doubleLetterColor,
         },
         purple: {
-            color: theme.tripleLetterTextColor,
+            color: darkTheme.tripleLetterColor,
         },
-        green: {
-            color: theme.doubleWordTextColor,
+        red: {
+            color: darkTheme.doubleWordColor,
         },
 
         // Settings Styles
@@ -267,27 +268,22 @@ export const createStyles = (theme) =>
             flex: 1,
             alignItems: "center",
             backgroundColor: theme.backgroundColor,
+            paddingVertical: 10
         },
         settingsContentContainer: {
             justifyContent: "center",
+            width: '100%',
             paddingHorizontal: 20,
-            marginBottom: 30,
         },
         settingCont: {
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             alignItems: "center",
-            marginBottom: 20,
+            margin: 10,
         },
         settingText: {
             color: theme.textColor,
             fontSize: 24,
-        },
-        settingsTitle: {
-            fontSize: 32,
-            fontWeight: "bold",
-            marginVertical: 30,
-            color: theme.textColor,
         },
 
         // Overlay Styles
