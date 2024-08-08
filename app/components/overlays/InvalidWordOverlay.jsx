@@ -1,7 +1,6 @@
-// components/InvalidWordOverlay.jsx
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Animated } from "react-native";
-import { useGameContext } from "../GameContext";
+import { Text, StyleSheet, Animated } from "react-native";
+import { useGameContext } from "../../GameContext";
 
 const InvalidWordOverlay = () => {
     const { isWordInvalid, setIsWordInvalid } = useGameContext();
@@ -34,6 +33,7 @@ const InvalidWordOverlay = () => {
     );
 };
 
+// This is a special exception so styles are placed here, rather than in the central location
 const styles = StyleSheet.create({
     overlay: {
         position: "absolute",
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         fontSize: 64,
         fontWeight: "bold",
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
     },
 });
 

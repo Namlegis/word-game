@@ -1,4 +1,3 @@
-// components/board/Tile.js
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { lightTheme, darkTheme, createStyles } from "../../styles/styles.jsx";
@@ -33,6 +32,7 @@ const Tile = ({ letter, value, modifier, onPress, isSelected }) => {
             : {}
     );
 
+    // This overrides the modifier tile color
     if (isSelected) {
         tileStyle.push(styles.selectedTile);
     }

@@ -1,4 +1,3 @@
-// components/SubmitButton.js
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import submitLogic from "../logic/submitLogic.jsx";

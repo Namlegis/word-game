@@ -1,7 +1,6 @@
-// components/GameEndOverlay.jsx
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useGameContext } from "../GameContext";
+import { useGameContext } from "../../GameContext"
 import { router } from "expo-router";
 
 const EndGameOverlay = () => {

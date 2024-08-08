@@ -1,7 +1,7 @@
 // GameContext.js
 import React, { createContext, useState, useContext, useMemo } from "react";
 
-import generateTileData from "./components/board/TileCreator.jsx";
+import { generateTileData } from "./components/board/TileCreator.jsx";
 
 const GameContext = createContext();
 

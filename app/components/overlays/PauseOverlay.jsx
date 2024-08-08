@@ -1,6 +1,5 @@
-// components/topBar/PauseOverlay.jsx
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useGameContext } from "../../GameContext";
 import { router } from "expo-router";
 import { lightTheme, darkTheme, createStyles } from "../../styles/styles"
@@ -15,8 +14,6 @@ const PauseOverlay = () => {
     const handleRestart = () => restart();
 
     const handleSettings = () => {
-        // TODO: Implement settings logic
-        console.log("Settings clicked");
         router.push("/Settings");
     };
 
@@ -25,8 +22,6 @@ const PauseOverlay = () => {
     };
 
     const handleMainMenu = () => {
-        // TODO: Implement main menu navigation
-        console.log("Main Menu clicked");
         setIsPaused(false);
         router.replace("/");
     };
@@ -57,36 +52,5 @@ const PauseOverlay = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    overlay: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.7)",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: "bold",
-        color: "white",
-        marginBottom: 20,
-    },
-    button: {
-        backgroundColor: "#4CAF50",
-        padding: 10,
-        marginVertical: 10,
-        width: 200,
-        alignItems: "center",
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: "white",
-        fontSize: 18,
-    },
-});
 
 export default PauseOverlay;

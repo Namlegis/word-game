@@ -1,9 +1,7 @@
-// components/logic/submitLogic.jsx
-
 import { useEffect, useMemo } from "react";
 import { useGameContext } from "../../GameContext";
 import { saveScore } from "../../../scoreStorage";
-import generateReplacementTiles from "../board/TileCreator";
+import { generateReplacementTiles } from "../board/TileCreator";
 import wordList from "../../../wordList.json";
 
 const submitLogic = () => {
@@ -24,6 +22,7 @@ const submitLogic = () => {
         totalScore,
     } = useGameContext();
 
+    // A set is used as checking sets is generally faster than checking an array
     const wordSet = useMemo(() => {
         return new Set(wordList.map((item) => item.word.toLowerCase()));
     }, []);
@@ -32,7 +31,6 @@ const submitLogic = () => {
         const saveGameScore = async () => {
             if (isGameEnd) {
                 await saveScore(totalScore);
-                console.log("Game Over!");
             }
         };
         saveGameScore();
@@ -55,7 +53,6 @@ const submitLogic = () => {
             if (round < 7) {
                 setRound((prev) => prev + 1);
                 replaceUsedTiles();
-                console.log("TileData set");
             } else {
                 setIsGameEnd(true);
             }

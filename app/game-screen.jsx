@@ -10,9 +10,9 @@ import SubmitButton from "./components/buttons/SubmitButton.jsx";
 import DeleteButton from "./components/buttons/DeleteButton.jsx";
 import TopBar from "./components/topBar/TopBar.jsx";
 import RoundCounter from "./components/RoundCounter.jsx";
-import PauseOverlay from "./components/topBar/PauseOverlay.jsx";
-import EndGameOverlay from "./components/GameEndOverlay.jsx";
-import InvalidWordOverlay from "./components/InvalidWordOverlay.jsx";
+import PauseOverlay from "./components/overlays/PauseOverlay.jsx";
+import EndGameOverlay from "./components/overlays/GameEndOverlay.jsx";
+import InvalidWordOverlay from "./components/overlays/InvalidWordOverlay.jsx";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx";
 
 const GameScreen = () => {

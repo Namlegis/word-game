@@ -1,7 +1,6 @@
-// components/CurrentWord.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useGameContext } from '../../GameContext';
+import React from "react";
+import { View, Text } from "react-native";
+import { useGameContext } from "../../GameContext";
 import { lightTheme, darkTheme, createStyles } from "../../styles/styles";
 
 const CurrentWord = () => {
@@ -15,15 +14,5 @@ const CurrentWord = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    currentContainer: {
-        marginBottom: 10,
-    },
-    word: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-});
 
 export default CurrentWord;

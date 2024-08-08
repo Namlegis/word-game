@@ -1,4 +1,3 @@
-// components/DeleteButton.js
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import { useGameContext } from "../../GameContext";
@@ -10,7 +9,10 @@ const DeleteButton = () => {
     const styles = createStyles(theme);
 
     return (
-        <TouchableOpacity style={[styles.button, styles.gameButton, styles.deleteButton]} onPress={handleDelete}>
+        <TouchableOpacity
+            style={[styles.button, styles.gameButton, styles.deleteButton]}
+            onPress={handleDelete}
+        >
             <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
     );

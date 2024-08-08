@@ -1,4 +1,3 @@
-// components/Board.js
 import React from "react";
 import { View } from "react-native";
 import { useGameContext } from "../../GameContext.jsx";
@@ -8,7 +7,7 @@ import { tilePressLogic } from "../logic/tilePressLogic.jsx";
 
 const Board = () => {
     const { tileData, selectedTiles, isDarkMode } = useGameContext();
-    const {handleTilePress} = tilePressLogic() 
+    const { handleTilePress } = tilePressLogic();
 
     const theme = isDarkMode ? darkTheme : lightTheme;
     const styles = createStyles(theme);
