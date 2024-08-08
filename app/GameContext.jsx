@@ -14,7 +14,7 @@ export const GameProvider = ({ children }) => {
     const [selectedTiles, setSelectedTiles] = useState([]);
     const [round, setRound] = useState(1);
     const [isPaused, setIsPaused] = useState(false);
-    const [isGameEnd, setIsGameEnd] = useState(false);
+    const [isGameEnd, setIsGameEnd] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [submitIsRight, setSubmitIsRight] = useState(false);
 

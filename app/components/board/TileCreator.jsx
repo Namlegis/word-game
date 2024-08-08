@@ -2,7 +2,7 @@ const generateTileData = (gridSize) => {
     const tileData = [];
     const totalTiles = gridSize * gridSize;
 
-    // Define the distribution of tiles with base values
+    // Define a distribution of tiles with base values
     const distribution = {
         A: { count: 9, baseValue: 1 },
         B: { count: 2, baseValue: 3 },
@@ -32,6 +32,7 @@ const generateTileData = (gridSize) => {
         Z: { count: 1, baseValue: 10 },
     };
 
+    // Create a tiles array holding tile objects
     const tiles = Object.entries(distribution).flatMap(
         ([letter, { count, baseValue }]) =>
             Array.from({ length: count }, () => ({
@@ -47,12 +48,29 @@ const generateTileData = (gridSize) => {
         [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
     }
 
-    // Take the required number of tiles based on the grid size
+    // Return the required number of tiles using a slice
     tileData.push(...tiles.slice(0, totalTiles));
     return tileData;
 };
 
-// Helper function to get a random modifier based on probabilities
+const generateReplacementTiles = (numTiles) => {
+    const tiles = Object.entries(distribution).flatMap(
+        ([letter, { count, baseValue }]) =>
+            Array.from({ length: count }, () => ({
+                letter,
+                value: baseValue + Math.floor(Math.random() * 6),
+                modifier: getRandomModifier(),
+            }))
+    );
+    // Shuffle
+    for (let i = tiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+    }
+    return tiles.slice(0, numTiles);
+};
+
+// Gets a random modifier based on probabilities
 const getRandomModifier = () => {
     const randomValue = Math.random();
 

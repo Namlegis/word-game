@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from "react";
 import { useGameContext } from "../../GameContext";
 import { saveScore } from "../../../scoreStorage";
-import generateTileData from "../board/TileCreator";
+import generateReplacementTiles from "../board/TileCreator";
 import wordList from "../../../wordList.json";
 
 const submitLogic = () => {
@@ -40,7 +40,7 @@ const submitLogic = () => {
 
     const replaceUsedTiles = () => {
         const newTileData = [...tileData];
-        const newTiles = generateTileData(selectedTiles.length);
+        const newTiles = generateReplacementTiles(selectedTiles.length);
         selectedTiles.forEach((index, i) => {
             newTileData[index] = newTiles[i];
         });
