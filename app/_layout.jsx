@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Slot, Stack } from "expo-router";
-import { GameProvider } from "./GameContext"; // Adjust the path if necessary
+import { Stack } from "expo-router";
+import { GameProvider } from "./GameContext";
 
 const RootLayout = () => {
     return (

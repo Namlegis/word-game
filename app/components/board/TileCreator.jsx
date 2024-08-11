@@ -1,4 +1,6 @@
+
 // Defines the distribution of tiles and their base values
+// Similar to creating a bag and putting "count" number tiles in
 const distribution = {
     A: { count: 9, baseValue: 1 },
     B: { count: 2, baseValue: 3 },
@@ -29,6 +31,7 @@ const distribution = {
 };
 
 // Creates a tiles array holding tile objects
+// A random amount (0-6) is added to the base value
 const createTilesFromDistribution = () => {
     const tiles = [];
 

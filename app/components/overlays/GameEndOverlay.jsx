@@ -10,10 +10,6 @@ const EndGameOverlay = () => {
         restart,
     } = useGameContext();
 
-    const handleRestart = () => {
-        restart();
-    };
-
     const handleMainMenu = () => {
         console.log("Main Menu clicked");
         router.replace("/");
@@ -25,7 +21,7 @@ const EndGameOverlay = () => {
         <View style={styles.overlay}>
             <Text style={styles.title}>Game Over!</Text>
             <Text style={styles.title}>Your Score was {totalScore}</Text>
-            <TouchableOpacity style={styles.button} onPress={handleRestart}>
+            <TouchableOpacity style={styles.button} onPress={restart}>
                 <Text style={styles.buttonText}>Restart</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleMainMenu}>
@@ -35,6 +31,7 @@ const EndGameOverlay = () => {
     );
 };
 
+// This is a special exception so styles are placed here, rather than in the central location
 const styles = StyleSheet.create({
     overlay: {
         position: "absolute",

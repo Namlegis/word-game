@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useGameContext } from "../../GameContext";
 import { saveScore } from "../../../scoreStorage";
 import { generateReplacementTiles } from "../board/TileCreator";
-import wordList from "../../../wordList.json";
+import wordList from "../../../assets/wordList.json"
 
 const submitLogic = () => {
     const {
@@ -22,11 +22,13 @@ const submitLogic = () => {
         totalScore,
     } = useGameContext();
 
-    // A set is used as checking sets is generally faster than checking an array
+    // A set is used to hold the word list
+    // Checking sets is usually faster than checking an array
     const wordSet = useMemo(() => {
         return new Set(wordList.map((item) => item.word.toLowerCase()));
     }, []);
 
+    // Checks for "isGameEnd" to change, then saves the total score
     useEffect(() => {
         const saveGameScore = async () => {
             if (isGameEnd) {
@@ -45,6 +47,7 @@ const submitLogic = () => {
         setTileData(newTileData);
     };
 
+    // Checks if word is in word list and responds accordingly
     const handleSubmit = () => {
         if (wordSet.has(currentWord.toLowerCase())) {
             setTotalScore((prev) => prev + currentScore);

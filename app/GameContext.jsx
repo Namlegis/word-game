@@ -1,4 +1,3 @@
-// GameContext.js
 import React, { createContext, useState, useContext, useMemo } from "react";
 
 import { generateTileData } from "./components/board/TileCreator.jsx";
@@ -45,7 +44,6 @@ export const GameProvider = ({ children }) => {
         setIsFirstWord(true);
     };
 
-    // get currentWord, currentScore, and currentMods from selectedTiles
     // useMemo saves the outcome of the function until one of the datasets changes
     const currentWord = useMemo(
         () => selectedTiles.map((index) => tileData[index].letter).join(""),

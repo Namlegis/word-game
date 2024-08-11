@@ -1,62 +1,42 @@
-// HighScores.jsx
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { getHighScores } from '../scoreStorage';
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList } from "react-native";
+import { getHighScores } from "../scoreStorage";
+import { useGameContext } from "./GameContext";
+import { lightTheme, darkTheme, createStyles } from "./styles/styles";
 
 const HighScoresPage = () => {
-  const [highScores, setHighScores] = useState([]);
+    const [highScores, setHighScores] = useState([]);
+    const { isDarkMode } = useGameContext();
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const styles = createStyles(theme);
 
-  useEffect(() => {
-    const loadHighScores = async () => {
-      const scores = await getHighScores();
-      setHighScores(scores);
-    };
-    loadHighScores();
-  }, []);
+    useEffect(() => {
+        const loadHighScores = async () => {
+            const scores = await getHighScores();
+            setHighScores(scores);
+        };
+        loadHighScores();
+    }, []);
 
-  const renderScoreItem = ({ item, index }) => (
-    <View style={styles.scoreItem}>
-      <Text style={styles.rank}>{index + 1}</Text>
-      <Text style={styles.score}>{item}</Text>
-    </View>
-  );
+    const renderScoreItem = ({ item, index }) => (
+        <View style={styles.scoreItem}>
+            <Text style={styles.rank}>{index + 1}</Text>
+            <Text style={styles.score}>{item}</Text>
+        </View>
+    );
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>High Scores</Text>
-      <FlatList
-        data={highScores}
-        renderItem={renderScoreItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+          <View style={styles.boardBar}></View>
+          <Text style={styles.title}>High Scores</Text>
+          <View style={styles.boardBar}></View>
+          <FlatList
+              data={highScores}
+              renderItem={renderScoreItem}
+              keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+    );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  scoreItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  rank: {
-    fontWeight: 'bold',
-  },
-  score: {
-    fontSize: 16,
-  },
-});
 
 export default HighScoresPage;

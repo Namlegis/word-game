@@ -1,14 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import {
-    Text,
-    View,
-    TouchableOpacity,
-} from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useGameContext } from "./GameContext.jsx";
-import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx"
-
+import { lightTheme, darkTheme, createStyles } from "./styles/styles.jsx";
 
 export default function App() {
     const { isGameEnd, restart, isDarkMode } = useGameContext();
@@ -41,7 +35,7 @@ export default function App() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                <Text style={styles.title}>Word Game</Text>
+                <Text style={styles.title}>Septaggle</Text>
                 {!isGameEnd && (
                     <TouchableOpacity
                         style={styles.button}

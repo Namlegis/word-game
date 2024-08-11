@@ -12,8 +12,10 @@ export const tilePressLogic = () => {
 
     const isAdjacentTile = (index) => {
         if (selectedTiles.length === 0) return true;
-        // Gets the row and column of last selected tile
+
         const lastSelectedTile = selectedTiles[selectedTiles.length - 1];
+
+        // Gets the row and column of last selected tile
         const lastRow = Math.floor(lastSelectedTile / gridSize);
         const lastCol = lastSelectedTile % gridSize;
 
@@ -22,6 +24,7 @@ export const tilePressLogic = () => {
         const currentCol = index % gridSize;
 
         // Returns true or false based on if it is adjacent, takes into account diagonals
+        // Doesn't worry about same tile, that's handled below
         return (
             Math.abs(currentRow - lastRow) <= 1 &&
             Math.abs(currentCol - lastCol) <= 1

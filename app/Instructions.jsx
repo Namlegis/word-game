@@ -1,4 +1,3 @@
-// Instructions.jsx
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { lightTheme, darkTheme, createStyles } from "./styles/styles";
@@ -28,14 +27,24 @@ const Instructions = () => {
                     2. Letters must be adjacent (including diagonally).
                 </Text>
                 <Text style={styles.instructionsText}>
-                    3. Each letter has an individual point value based on the letter and a random bonus between 0 and 6 points.
+                    3. Each letter has an individual point value based on the
+                    letter and a random bonus between 0 and 6 points.
                 </Text>
                 <Text style={styles.instructionsText}>
-                    4. Colored tiles have special bonuses:                      
+                    4. Colored tiles have special bonuses:
                 </Text>
-                <Text style={[styles.instructionsText, styles.blue]}>     Blue = Double Letter (DL)</Text>
-                <Text style={[styles.instructionsText, styles.purple]}>     Purple = Triple Letter (TL)</Text>
-                <Text style={[styles.instructionsText, styles.red]}>     Red = Double Word (DW)</Text>
+                <Text style={[styles.instructionsText, styles.blue]}>
+                    {" "}
+                    Blue = Double Letter (DL)
+                </Text>
+                <Text style={[styles.instructionsText, styles.purple]}>
+                    {" "}
+                    Purple = Triple Letter (TL)
+                </Text>
+                <Text style={[styles.instructionsText, styles.red]}>
+                    {" "}
+                    Red = Double Word (DW)
+                </Text>
                 <Text style={styles.instructionsText}>
                     5. Words longer than 4 letters get additional bonuses.
                 </Text>
