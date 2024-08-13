@@ -26,9 +26,9 @@ const HighScoresPage = () => {
     );
 
     return (
-        <View style={styles.container}>
+        <View style={styles.highScoreCont}>
           <View style={styles.boardBar}></View>
-          <Text style={styles.title}>High Scores</Text>
+          <Text style={styles.title}>Top 10 Scores</Text>
           <View style={styles.boardBar}></View>
           <FlatList
               data={highScores}

@@ -268,11 +268,11 @@ export const createStyles = (theme) =>
             flex: 1,
             alignItems: "center",
             backgroundColor: theme.backgroundColor,
-            paddingVertical: 10
+            paddingVertical: 10,
         },
         settingsContentContainer: {
             justifyContent: "center",
-            width: '100%',
+            width: "100%",
             paddingHorizontal: 20,
         },
         settingCont: {
@@ -284,6 +284,21 @@ export const createStyles = (theme) =>
         settingText: {
             color: theme.textColor,
             fontSize: 24,
+        },
+
+        highScoreCont: { flex: 1, padding: 20 },
+        scoreItem: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: "#ccc",
+        },
+        rank: {
+            fontWeight: "bold",
+        },
+        score: {
+            fontSize: 16,
         },
 
         // Overlay Styles
